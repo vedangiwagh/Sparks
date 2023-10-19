@@ -2,9 +2,9 @@ package com.planning.mealsandrecipes.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
@@ -53,11 +53,11 @@ public class Ingredient {
     @Schema(description = "Fibre value of the ingredient.", example = "100")
     private BigDecimal fibre;
 
-    @OneToMany(
-            mappedBy = "ingredient"
-    )
-    @JsonIgnore
-    private Set<RecipeIngredient> ingredientSet = new HashSet<>();
+//    @OneToMany(
+//            mappedBy = "ingredient"
+//    )
+//    @JsonIgnore
+//    private Set<RecipeIngredient> ingredientSet = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

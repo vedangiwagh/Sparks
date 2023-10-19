@@ -1,22 +1,15 @@
 package com.planning.mealsandrecipes.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "recipe")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Schema(description = "This class represents recipe.")
@@ -41,19 +34,15 @@ public class Recipe {
     @Schema(description = "Client Identifier", example = "6")
     private Long client_id;
 
-    @Column(nullable = false)
-    @NotEmpty(message = required)
 
     @Schema(description = "Name", example = "Butter Chicken")
     private String name;
 
     @Column(nullable = false)
-    @NotEmpty(message = required)
     @Schema(description = "Description", example = "Cook it asap")
     private String description;
 
     @Column(nullable = false)
-    @NotEmpty(message = required)
     @Schema(description = "Instructions", example = "Dice tomatoes properly")
     private String instruction;
 
@@ -62,8 +51,6 @@ public class Recipe {
             name = "prep_time",
             nullable = false
     )
-    @NotNull(message = required)
-    @Min(value = 1, message = "Prep time should be greater than a minute")
     @Schema(description = "Prep time", example = "23")
     private Integer timeToPrepare;
 
@@ -71,28 +58,27 @@ public class Recipe {
             name = "cook_time",
             nullable = false
     )
-    @NotNull(message = required)
-    @Min(value = 1, message = "Cook time should be greater than a minute.")
+
     @Schema(description = "Cook time", example = "29")
     private Integer timeToCook;
 
     @OneToMany(
             mappedBy = "recipe"
     )
-    @JsonIgnore
-    private Set<RecipeIngredient> ingredientSet = new HashSet<>();
+//    @JsonIgnore
+//    private Set<RecipeIngredient> ingredientSet = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "recipe_categories",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "client_id")
-    )
-    private Set<Category> categories = new HashSet<>();
-
-    @ManyToMany(
-            mappedBy = "favoriteRecipes"
-    )
+//    @ManyToMany
+//    @JoinTable(
+//            name = "recipe_categories",
+//            joinColumns = @JoinColumn(name = "recipe_id"),
+//            inverseJoinColumns = @JoinColumn(name = "client_id")
+//    )
+////    private Set<Category> categories = new HashSet<>();
+//
+//    @ManyToMany(
+//            mappedBy = "favoriteRecipes"
+//    )
 
     @Override
     public boolean equals(Object o) {
