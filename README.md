@@ -123,7 +123,11 @@ List and describe the available API endpoints, including input parameters and ex
 
 List the main dependencies and technologies used in your project. For example:
 
-- Spring Boot
-- Spring Data JPA
-- Swagger
-- ...
+- **Spring Boot**: The framework for building Java applications.
+- **Spring Data JPA**: For working with relational databases.
+- **Swagger**: For API documentation.
+- **Travis CI or GitHub Actions**: For continuous integration and automated testing.
+- **JUnit**: For unit testing.
+- **Postman**: For API testing.
+- **SonarQube**: For static code analysis and identifying potential bugs.
+- **SQL Database**: For persistent data storage.
