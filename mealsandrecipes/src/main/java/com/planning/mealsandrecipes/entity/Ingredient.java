@@ -1,7 +1,6 @@
 package com.planning.mealsandrecipes.entity.ingredient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import cz.daiton.foodsquare.recipe_ingredient.RecipeIngredient;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
