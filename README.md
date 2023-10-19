@@ -1,6 +1,6 @@
 # 🥘 SPARKS plans your meals 🍽️ 
 
-## Team Members**:
+## Team Members:
 - Ritika Deshpande (rgd2127)
 - Vedangi Wagh (vw2287)
 - Jyotsna Penumaka (jp4321)
