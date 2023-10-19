@@ -1,4 +1,4 @@
-# SPARKS plans your meals 🍽️ 
+# 🥘 SPARKS plans your meals 🍽️ 
 
 ## Team Members**:
 - Ritika Deshpande (rgd2127)
