@@ -1,4 +1,10 @@
 package com.planning.mealsandrecipes.repository;
 
-public class ClientRepo {
+import com.planning.mealsandrecipes.entity.Client;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface ClientRepo extends CrudRepository<Client, Integer> {
 }
+
+

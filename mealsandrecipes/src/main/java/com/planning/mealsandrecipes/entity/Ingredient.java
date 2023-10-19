@@ -18,47 +18,16 @@ import java.util.Set;
 public class Ingredient {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
-    @Schema(description = "Identifier", example = "9")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(
-            unique = true,
-            nullable = false
-    )
-
-    @Schema(description = "Name", example = "Banana")
     private String name;
-
-    @Schema(description = "Protein value of the ingredient.", example = "7.7")
-    private BigDecimal protein;
-
-    @Schema(description = "Calories", example = "320")
-    private BigDecimal calories;
-
-    @Schema(description = "Carbs.", example = "350")
-    private BigDecimal carbs;
-
-    @Schema(description = "Sugar value of the ingredient.", example = "9")
-    private BigDecimal sugar;
-
-    @Schema(description = "Fat value", example = "50")
-    private BigDecimal fat;
-
-    @Schema(description = "Sodium value of the ingredient.", example = "10")
-    private BigDecimal sodium;
-
-    @Schema(description = "Fibre value of the ingredient.", example = "100")
-    private BigDecimal fibre;
-
-//    @OneToMany(
-//            mappedBy = "ingredient"
-//    )
-//    @JsonIgnore
-//    private Set<RecipeIngredient> ingredientSet = new HashSet<>();
-
+    private Double calories;
+    private Double fat;
+    private Double carbohydrates;
+    private Double fiber;
+    private Double sugar;
+    private Double protein;
+    private Double sodium;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,4 +40,6 @@ public class Ingredient {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }
