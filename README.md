@@ -1,14 +1,10 @@
-# Project Name
+# SPARKS plans your meals 🍽️ 
 
-**Description**: 
-
-**Team Members**:
+## Team Members**:
 - Ritika Deshpande (rgd2127)
 - Vedangi Wagh (vw2287)
 - Jyotsna Penumaka (jp4321)
 - Surabhi Adhikari (sa4149)
-
-**Team Name**: Sparks
 
 **Development Platform**: MacOS
 
@@ -63,7 +59,6 @@ During the first iteration, we will perform the following types of testing:
 - [API Endpoints](#api-endpoints)
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Project Structure
 
@@ -79,8 +74,6 @@ Explain the overall structure of your project. For example:
 - ...
 
 ## Files and Components
-
-Briefly introduce key files and components used in your project. For example:
 
 ### Ingredient.java
 
@@ -131,18 +124,3 @@ List the main dependencies and technologies used in your project. For example:
 - Spring Data JPA
 - Swagger
 - ...
-
-## Contributing
-
-Explain how others can contribute to your project. For example:
-
-1. Fork the project.
-2. Create a new branch.
-3. Make your changes.
-4. Submit a pull request.
-
-## License
-
-Specify the license under which your project is distributed. For example:
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
