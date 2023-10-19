@@ -117,8 +117,6 @@ List and describe the available API endpoints, including input parameters and ex
 - `PUT /api/v1/recipes/{id}:` Edit a recipe.
 - `DELETE /api/v1/recipes/{id}:` Delete a recipe.
 
-
-
 ## Dependencies
 
 List the main dependencies and technologies used in your project. For example:
@@ -131,3 +129,37 @@ List the main dependencies and technologies used in your project. For example:
 - **Postman**: For API testing.
 - **SonarQube**: For static code analysis and identifying potential bugs.
 - **SQL Database**: For persistent data storage.
+
+## Steps to run the Service 🎉 
+
+#### Clone the project
+```bash
+git clone https://github.com/vedangiwagh/Sparks.git
+```
+#### Open the project
+```bash
+cd mealsandrecipes
+```
+#### Configure required variables located in src/main/resources/application-sql.properties
+```bash
+database=mysql
+spring.cloud.gcp.sql.database-name=<DATABASE NAME>
+spring.cloud.gcp.sql.instance-connection-name=<INSTANCE_CONNECTION_NAME>
+spring.sql.init.mode=always
+```
+#### Configure required variables located in src/main/resources/application.properties
+```bash
+spring.profiles.active=mysql
+```
+##### We have used the Google Cloud PostGreSql in our project. To go forward with testing, you need to create databases in GCP and create necessary tables . Then add a credentials file to your project for accessing the Database instance from your project called credentials.json
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"
+```
+#### Create a executable JAR file in terminal
+```bash
+mvnw clean install
+```
+#### Run the application in terminal
+```bash
+mvn spring-boot:run
+```
