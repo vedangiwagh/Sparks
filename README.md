@@ -68,10 +68,6 @@ Explain the overall structure of your project. For example:
   - Controllers
   - Services
   - Models (Entities)
-- Frontend
-  - ...
-- Configuration
-- ...
 
 ## Files and Components
 
