@@ -106,16 +106,16 @@ List and describe the available API endpoints, including input parameters and ex
 
 ### Ingredient Endpoints
 
-`GET /api/v1/ingredients/{id}:` Get a specific ingredient by ID.
-`GET /api/v1/ingredients:` Get a list of all ingredients.
+- `GET /api/v1/ingredients/{id}:` Get a specific ingredient by ID.
+- `GET /api/v1/ingredients:` Get a list of all ingredients.
 
 ### Recipe Endpoints:
-`GET /api/v1/recipes/{id}:` Get a specific recipe by ID.
-`GET /api/v1/recipes:` Get a list of all recipes.
-`GET /api/v1/recipes/user/{id}:` Get a list of all recipes for a specific user.
-`POST /api/v1/recipes/add:` Add a new recipe.
-`PUT /api/v1/recipes/{id}:` Edit a recipe.
-`DELETE /api/v1/recipes/{id}:` Delete a recipe.
+- `GET /api/v1/recipes/{id}:` Get a specific recipe by ID.
+- `GET /api/v1/recipes:` Get a list of all recipes.
+- `GET /api/v1/recipes/user/{id}:` Get a list of all recipes for a specific user.
+- `POST /api/v1/recipes/add:` Add a new recipe.
+- `PUT /api/v1/recipes/{id}:` Edit a recipe.
+- `DELETE /api/v1/recipes/{id}:` Delete a recipe.
 
 
 
