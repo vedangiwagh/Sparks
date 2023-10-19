@@ -2,12 +2,9 @@ package com.planning.mealsandrecipes.repository;
 
 import com.planning.mealsandrecipes.entity.Client;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
-public class ClientRepo {
-public List<Client> getClientsFromDB()
-{
-    return new ArrayList<>();
+public interface ClientRepo extends CrudRepository<Client, Integer> {
 }
-}
+
+
