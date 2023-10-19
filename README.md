@@ -1,6 +1,28 @@
 # Project Name
 
-**Description**: (Provide a brief description of your project)
+**Description**: 
+
+**Team Members**:
+- Ritika Deshpande (rgd2127)
+- Vedangi Wagh (vw2287)
+- Jyotsna Penumaka (jp4321)
+- Surabhi Adhikari (sa4149)
+
+**Team Name**: Sparks
+
+**Development Platform**: MacOS
+
+**Programming Language**: Java
+
+**GitHub Repository**: [Sparks on GitHub](https://github.com/vedangiwagh/Sparks)
+
+## Project Overview
+
+### Part 2: Project Description
+
+Our project aims to create a set of APIs that assist users in meal planning, online grocery ordering, and nutritional value analysis. These APIs can be integrated into various applications, allowing users to plan their meals, order groceries, and obtain nutritional information.
+
+
 
 ## Table of Contents
 
