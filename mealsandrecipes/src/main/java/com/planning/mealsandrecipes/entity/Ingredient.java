@@ -1,4 +1,4 @@
-package com.planning.mealsandrecipes.entity.ingredient;
+package com.planning.mealsandrecipes.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
