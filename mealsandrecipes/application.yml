@@ -1,0 +1,24 @@
+#server:
+#  servlet:
+#    context-path: /card-service
+#
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql:///${DB_DATABASE:postgres}
+#    username: ${DB_USERNAME:/Users/r_itika/Documents/Github/Sparks/mealsandrecipes/sparksmealplan-3902876ce98d.json}
+#    password: ${DB_PASSWORD:password}
+#    hikari:
+#      minimum-idle: 2
+#      maximum-pool-size: 5
+#      data-source-properties:
+#        socketFactory: com.google.cloud.sql.postgres.SocketFactory
+#        cloudSqlInstance: ${DB_CLOUD_SQL_INSTANCE:sparksmealplan:us-central1:sparks}
+#        enableIamAuth: true
+#        sslmode: disable
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.PostgreSQL10Dialect
