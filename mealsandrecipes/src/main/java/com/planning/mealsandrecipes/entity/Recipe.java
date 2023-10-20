@@ -11,35 +11,37 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Schema(description = "This class represents recipe.")
+@Schema(description = "This class represents a recipe.")
 @Entity
 @Table(name = "Recipe")
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RecipeID")
-    private Integer recipeId;
+    private Integer recipeId; // Unique identifier for the recipe
 
     @ManyToOne
     @JoinColumn(name = "ClientID")
-    private Client client;
+    private Client client; // Client associated with the recipe
 
     @Column(name = "RecipeName")
-    private String recipeName;
+    private String recipeName; // Name of the recipe
 
     @Column(name = "Description", columnDefinition = "TEXT")
-    private String description;
+    private String description; // Recipe description
 
     @Column(name = "Instructions", columnDefinition = "TEXT")
-    private String instructions;
+    private String instructions; // Cooking instructions
 
     @Column(name = "PreparationTime")
-    private Integer preparationTime;
+    private Integer preparationTime; // Preparation time in minutes
 
     @Column(name = "CookingTime")
-    private Integer cookingTime;
+    private Integer cookingTime; // Cooking time in minutes
 
     // Constructors, getters, and setters
+
+    // Override the equals method to compare recipes by their ID.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,6 +50,7 @@ public class Recipe {
         return recipeId.equals(recipe.recipeId);
     }
 
+    // Override the hashCode method to compute the hash code based on the recipe's ID.
     @Override
     public int hashCode() {
         return Objects.hash(recipeId);
