@@ -19,15 +19,19 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private Double calories;
-    private Double fat;
-    private Double carbohydrates;
-    private Double fiber;
-    private Double sugar;
-    private Double protein;
-    private Double sodium;
+    private Long id; // Unique identifier for the ingredient
+    private String name; // Name of the ingredient
+    private Double calories; // Caloric content
+    private Double fat; // Fat content
+    private Double carbohydrates; // Carbohydrate content
+    private Double fiber; // Dietary fiber content
+    private Double sugar; // Sugar content
+    private Double protein; // Protein content
+    private Double sodium; // Sodium content
+
+    // Constructors, getters, and setters
+
+    // Override the equals method to compare ingredients by their ID.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,10 +40,9 @@ public class Ingredient {
         return id.equals(that.id);
     }
 
+    // Override the hashCode method to compute the hash code based on the ingredient's ID.
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
-
-
 }
