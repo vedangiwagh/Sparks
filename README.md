@@ -148,7 +148,7 @@ The `ClientController` manages API endpoints for clients, enabling user-specific
 
 `RecipeTest.java` is the unit test class for testing the `Recipe` entity.
 
-### [Additional components as needed]
+
 
 ## How to Run
 
@@ -185,7 +185,7 @@ To run the application, follow these steps:
 - `PUT /api/v1/clients/{id}`: Update an existing client.
 - `DELETE /api/v1/clients/{id}`: Delete a client.
 
-### [Additional Endpoints as Needed]
+
 
 ## Dependencies
 
