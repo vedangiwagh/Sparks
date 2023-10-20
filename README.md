@@ -20,7 +20,6 @@ Key Features:
 - Recipe Management: Create, store, update, and retrieve recipes in the database.
 - Meal Planning: Plan daily, weekly, or monthly meals, and generate grocery lists based on the meal plan.
 - Nutrition Analysis: Calculate the nutritional value of meals based on ingredients and quantities.
-- User Profiles: Users can create profiles with dietary preferences and restrictions.
 
 ### Client Types
 
