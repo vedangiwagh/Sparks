@@ -10,8 +10,6 @@
 
 **Programming Language**: Java
 
-**GitHub Repository**: [Meals and Recipes Planner on GitHub](https://github.com/yourusername/meals-and-recipes-planner)
-
 ## Project Overview
 
 ### Project Description
