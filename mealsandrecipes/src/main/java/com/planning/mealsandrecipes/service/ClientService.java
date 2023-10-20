@@ -35,7 +35,7 @@ public class ClientService {
 
     public Client updateClient(int id, Client updatedClient) {
         if (clientRepo.existsById(id)) {
-            updatedClient.setClientID(id);
+//            updatedClient.setClientID(id);
             return clientRepo.save(updatedClient);
         }
         return null; // Handle the case where the client doesn't exist
