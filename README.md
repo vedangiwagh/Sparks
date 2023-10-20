@@ -317,4 +317,5 @@ List the main dependencies and technologies used in your project:
 - Travis CI or GitHub Actions: For continuous integration and automated testing.
 - JUnit: For unit testing.
 - Postman: For API testing.
+- Apache Maven Checkstyle Plugin: style checking
 
