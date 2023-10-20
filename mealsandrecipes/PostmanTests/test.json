@@ -130,11 +130,10 @@
         }
       }
     },
-    
-{
+    {
       "name": "Test Case 7: Update Recipe",
       "description": "Test updating an existing recipe",
- "request": {
+      "request": {
         "method": "PUT",
         "url": "/api/v1/recipes/1",
         "headers": {
@@ -236,4 +235,5 @@
         }
       }
     }
-   
+  ]
+}
