@@ -130,4 +130,112 @@
         }
       }
     },
+    
+{
+      "name": "Test Case 7: Update Recipe",
+      "description": "Test updating an existing recipe",
+ "request": {
+        "method": "PUT",
+        "url": "/api/v1/recipes/1",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Updated Recipe",
+          "instructions": "Step A, Step B",
+          "servings": 3
+        }
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "name": "Updated Recipe",
+          "instructions": "Step A, Step B",
+          "servings": 3
+        }
+      }
+    },
+    {
+      "name": "Test Case 8: Delete Recipe",
+      "description": "Test deleting a recipe by ID",
+      "request": {
+        "method": "DELETE",
+        "url": "/api/v1/recipes/2"
+      },
+      "expected_response": {
+        "status_code": 204
+      }
+    },
+    {
+      "name": "Test Case 9: Get Client by ID",
+      "description": "Test retrieving a client by their ID",
+      "request": {
+        "method": "GET",
+        "url": "/api/v1/clients/1"
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "name": "John Doe",
+          "email": "john@example.com"
+        }
+      }
+    },
+    {
+      "name": "Test Case 10: Create Client",
+      "description": "Test creating a new client",
+      "request": {
+        "method": "POST",
+        "url": "/api/v1/clients",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Jane Smith",
+          "email": "jane@example.com"
+        }
+      },
+      "expected_response": {
+        "status_code": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 2,
+          "name": "Jane Smith",
+          "email": "jane@example.com"
+        }
+      }
+    },
+    {
+      "name": "Test Case 11: Update Client",
+      "description": "Test updating a client's information",
+      "request": {
+        "method": "PUT",
+        "url": "/api/v1/clients/1",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Updated John Doe",
+          "email": "john.doe@example.com"
+        }
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+    }
+}
    
