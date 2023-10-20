@@ -228,6 +228,61 @@ The API follows standard HTTP status codes for error responses. In case of an er
 - **Request Body**: Contains recipe details.
 - **Response**: Returns the newly created recipe.
 
+### 4. Update an Existing Recipe
+
+- **Endpoint**: `PUT /api/v1/recipes/{id}`
+- **Description**: Update an existing recipe by specifying its ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/recipes/1`
+- **Request Body**: Contains updated recipe details.
+- **Response**: Returns the updated recipe.
+
+### 5. Delete a Recipe
+
+- **Endpoint**: `DELETE /api/v1/recipes/{id}`
+- **Description**: Delete a recipe with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/recipes/1`
+- **Response**: No content (204) if the recipe is successfully deleted.
+
+## Client Endpoints
+
+### 1. Get a Specific Client
+
+- **Endpoint**: `GET /api/v1/clients/{id}`
+- **Description**: Retrieve a specific client by their unique identifier (ID).
+- **Example Request**: `GET /api/v1/clients/1`
+- **Response**: Returns the client with the specified ID.
+
+### 2. Get All Clients
+
+- **Endpoint**: `GET /api/v1/clients`
+- **Description**: Retrieve a list of all clients stored in the database.
+- **Example Request**: `GET /api/v1/clients`
+- **Response**: Returns a list of all clients.
+
+### 3. Create a New Client
+
+- **Endpoint**: `POST /api/v1/clients`
+- **Description**: Create a new client by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/clients`
+- **Request Body**: Contains client details.
+- **Response**: Returns the newly created client.
+
+### 4. Update an Existing Client
+
+- **Endpoint**: `PUT /api/v1/clients/{id}`
+- **Description**: Update an existing client by specifying their ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/clients/1`
+- **Request Body**: Contains updated client details.
+- **Response**: Returns the updated client.
+
+### 5. Delete a Client
+
+- **Endpoint**: `DELETE /api/v1/clients/{id}`
+- **Description**: Delete a client with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/clients/1`
+- **Response**: No content (204) if the client is successfully deleted.
+
+
 ## Dependencies
 
 List the main dependencies and technologies used in your project:
