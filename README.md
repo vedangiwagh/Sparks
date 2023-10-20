@@ -1,4 +1,4 @@
-# 🥘 SPARKS plans your meals 🍽️ 
+# 🍽️ Meals and Recipes Planner 📆
 
 ## Team Members:
 - Ritika Deshpande (rgd2127)
@@ -10,37 +10,49 @@
 
 **Programming Language**: Java
 
-**GitHub Repository**: [Sparks on GitHub](https://github.com/vedangiwagh/Sparks)
+**GitHub Repository**: [Meals and Recipes Planner on GitHub](https://github.com/yourusername/meals-and-recipes-planner)
 
 ## Project Overview
 
-### Part 2: Project Description
+### Project Description
 
-Our project aims to create a set of APIs that assist users in meal planning, online grocery ordering, and nutritional value analysis. These APIs can be integrated into various applications, allowing users to plan their meals, order groceries, and obtain nutritional information.
+Our project is a web application that helps users plan their meals, manage recipes, and track nutritional values. Users can create, store, update, and retrieve recipes, plan their meals, and analyze the nutritional content of their diet. This project offers a comprehensive set of APIs that can be integrated into various applications for meal planning and nutrition tracking.
 
 Key Features:
-- Recipe Management APIs: Create, store, and update recipes in the database. Generate grocery lists based on recipe requirements and ingredients.
-- Meal Planning API: Create and manage meal plans. Generate grocery lists based on meal plans.
-- Nutrition Value API: Calculate the nutritional value of meal plans based on ingredients and quantities.
+- Recipe Management: Create, store, update, and retrieve recipes in the database.
+- Meal Planning: Plan daily, weekly, or monthly meals, and generate grocery lists based on the meal plan.
+- Nutrition Analysis: Calculate the nutritional value of meals based on ingredients and quantities.
+- User Profiles: Users can create profiles with dietary preferences and restrictions.
 
-We will store persistent data, including selected recipes, meal schedules, dietary preferences, and user-specific dietary restrictions. This data can be accessed, modified, and retrieved by users at any time.
+### Client Types
 
-### Part 3: Client Types
+Our project is designed to serve two main types of clients:
 
-We envision two distinct kinds of clients that may use our service:
+1. Senior Citizens Meal Planning App: Targeted at senior citizens with dietary restrictions, this app allows them to plan meals based on specific ingredients and nutritional values.
 
-1. Senior Citizen Meal Planning App: Targeted towards senior citizens with dietary restrictions, this app can use our service to plan meals based on ingredients and nutritional values.
-2. Fitness Meal Planner App: Fitness enthusiasts who require strict dietary monitoring can use our service to tailor meals to their specific requirements.
+2. Fitness Meal Planner App: Fitness enthusiasts can use our service to customize and monitor their diet plans to meet their fitness goals.
 
-### Part 4: Testing
+### Testing
 
-During the first iteration, we will perform the following types of testing:
+During the development of this project, we will perform various types of testing, including:
 
-- Unit Testing: Testing individual subroutines and components in isolation, including edge cases and error scenarios.
-- API Testing/Integration Testing: Using tools like Postman, we will test the APIs for load handling and concurrency, ensuring they can handle multiple client instances.
-- Persistent Data Testing: To ensure data consistency, we will simulate service restarts and monitor data persistence using JUnit.
+- Unit Testing: Testing individual components and subroutines to ensure they work correctly.
+- API Testing/Integration Testing: Validating API functionality using tools like Postman to test load handling and concurrency.
+- Persistent Data Testing: Ensuring data consistency and persistence, including simulating service restarts to monitor data integrity.
 
-### Part 5: Software Engineering Tools
+### Unit Testing Details
+
+We use JUnit for unit testing in this project. Below are some key details:
+
+- Test Runner: JUnit
+- Test Cases: We have written unit tests for key components and functions to ensure they work correctly.
+- Edge Cases: We've covered edge cases and error scenarios in our unit tests.
+- Mocking: Mockito is used for mocking dependencies and simulating behavior.
+- Test Reports: Test results and reports are generated and stored for analysis.
+
+### Software Engineering Tools
+
+We use the following tools and technologies for our project:
 
 - Persistent Datastore: SQL Database
 - Build or Package Manager: Maven
@@ -49,7 +61,6 @@ During the first iteration, we will perform the following types of testing:
 - Test Runner for Unit Testing: JUnit
 - Test Runner for API Testing: Postman
 - Static Analysis Bug Finder: SonarQube
-
 
 ## Table of Contents
 
@@ -62,100 +73,24 @@ During the first iteration, we will perform the following types of testing:
 
 ## Project Structure
 
-Explain the overall structure of your project. For example:
+Our project is structured as follows:
 
 - Backend
   - Controllers
   - Services
   - Models (Entities)
+- Frontend (if applicable)
 
 ## Files and Components
 
 ### Ingredient.java
 
-This file defines the `Ingredient` entity class, which represents ingredients used in the application.
+`Ingredient.java` defines the `Ingredient` entity class that represents ingredients used in the application.
 
 ### IngredientController.java
 
-The `IngredientController` handles API endpoints related to ingredients.
+The `IngredientController` manages API endpoints related to ingredients.
 
 ### Recipe.java
 
-This file defines the `Recipe` entity class, representing recipes in the application.
-
-### RecipeController.java
-
-The `RecipeController` manages API endpoints for recipes.
-
-## How to Run
-
-Explain how to run the project, including any prerequisites or setup. For example:
-
-1. Make sure you have Java and Maven installed.
-2. Clone the project repository.
-3. Configure the database connection in `application.properties`.
-4. Run the application using Maven: `mvn spring-boot:run`.
-
-## API Endpoints
-
-List and describe the available API endpoints, including input parameters and expected responses.
-
-### Ingredient Endpoints
-
-- `GET /api/v1/ingredients/{id}:` Get a specific ingredient by ID.
-- `GET /api/v1/ingredients:` Get a list of all ingredients.
-
-### Recipe Endpoints:
-- `GET /api/v1/recipes/{id}:` Get a specific recipe by ID.
-- `GET /api/v1/recipes:` Get a list of all recipes.
-- `GET /api/v1/recipes/user/{id}:` Get a list of all recipes for a specific user.
-- `POST /api/v1/recipes/add:` Add a new recipe.
-- `PUT /api/v1/recipes/{id}:` Edit a recipe.
-- `DELETE /api/v1/recipes/{id}:` Delete a recipe.
-
-## Dependencies
-
-List the main dependencies and technologies used in your project. For example:
-
-- **Spring Boot**: The framework for building Java applications.
-- **Spring Data JPA**: For working with relational databases.
-- **Swagger**: For API documentation.
-- **Travis CI or GitHub Actions**: For continuous integration and automated testing.
-- **JUnit**: For unit testing.
-- **Postman**: For API testing.
-- **SonarQube**: For static code analysis and identifying potential bugs.
-- **SQL Database**: For persistent data storage.
-
-## Steps to run the Service 🎉 
-
-#### Clone the project
-```bash
-git clone https://github.com/vedangiwagh/Sparks.git
-```
-#### Open the project
-```bash
-cd mealsandrecipes
-```
-#### Configure required variables located in src/main/resources/application-sql.properties
-```bash
-database=mysql
-spring.cloud.gcp.sql.database-name=<DATABASE NAME>
-spring.cloud.gcp.sql.instance-connection-name=<INSTANCE_CONNECTION_NAME>
-spring.sql.init.mode=always
-```
-#### Configure required variables located in src/main/resources/application.properties
-```bash
-spring.profiles.active=mysql
-```
-##### We have used the Google Cloud PostGreSql in our project. To go forward with testing, you need to create databases in GCP and create necessary tables . Then add a credentials file to your project for accessing the Database instance from your project called credentials.json
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"
-```
-#### Create a executable JAR file in terminal
-```bash
-mvnw clean install
-```
-#### Run the application in terminal
-```bash
-mvn spring-boot:run
-```
+`Recipe.java` defines the `Recipe` entity class that represents recipes within the application.
