@@ -79,7 +79,6 @@ Our project is structured as follows:
   - Controllers
   - Services
   - Models (Entities)
-- Frontend (if applicable)
 
 ## Files and Components
 
@@ -94,3 +93,110 @@ The `IngredientController` manages API endpoints related to ingredients.
 ### Recipe.java
 
 `Recipe.java` defines the `Recipe` entity class that represents recipes within the application.
+
+### RecipeController.java
+
+The `RecipeController` handles API endpoints for recipes, allowing users to perform operations like creating, updating, and deleting recipes.
+
+### Client.java
+
+`Client.java` defines the `Client` entity class that represents users or clients of the application.
+
+### ClientController.java
+
+The `ClientController` manages API endpoints for clients, enabling user-specific operations.
+
+### ClientService.java
+
+`ClientService.java` contains the business logic for handling client-related operations.
+
+### ClientRepo.java
+
+`ClientRepo.java` is the repository interface for the `Client` entity, allowing database interaction.
+
+### IngredientService.java
+
+`IngredientService.java` contains the business logic for handling ingredient-related operations.
+
+### IngredientRepository.java
+
+`IngredientRepository.java` is the repository interface for the `Ingredient` entity, allowing database interaction.
+
+### RecipeService.java
+
+`RecipeService.java` contains the business logic for handling recipe-related operations.
+
+### RecipeRepository.java
+
+`RecipeRepository.java` is the repository interface for the `Recipe` entity, allowing database interaction.
+
+### RecipeControllerTest.java
+
+`RecipeControllerTest.java` is the unit test class for testing the `RecipeController`.
+
+### RecipeServiceTest.java
+
+`RecipeServiceTest.java` is the unit test class for testing the `RecipeService`.
+
+### IngredientServiceTest.java
+
+`IngredientServiceTest.java` is the unit test class for testing the `IngredientService`.
+
+### IngredientTests.java
+
+`IngredientTests.java` is the unit test class for testing the `Ingredient` entity.
+
+### RecipeTest.java
+
+`RecipeTest.java` is the unit test class for testing the `Recipe` entity.
+
+### [Additional components as needed]
+
+## How to Run
+
+To run the application, follow these steps:
+
+1. Make sure you have Java and Maven installed.
+2. Clone the project repository.
+3. Configure the database connection in `application.properties`.
+4. Run the application using Maven: `mvn spring-boot:run`.
+
+## API Endpoints
+
+### Ingredient Endpoints
+
+- `GET /api/v1/ingredients/{id}`: Get a specific ingredient by ID.
+- `GET /api/v1/ingredients`: Get a list of all ingredients.
+- `POST /api/v1/ingredients`: Create a new ingredient.
+- `PUT /api/v1/ingredients/{id}`: Update an existing ingredient.
+- `DELETE /api/v1/ingredients/{id}`: Delete an ingredient.
+
+### Recipe Endpoints
+
+- `GET /api/v1/recipes/{id}`: Get a specific recipe by ID.
+- `GET /api/v1/recipes`: Get a list of all recipes.
+- `POST /api/v1/recipes`: Create a new recipe.
+- `PUT /api/v1/recipes/{id}`: Update an existing recipe.
+- `DELETE /api/v1/recipes/{id}`: Delete a recipe.
+
+### Client Endpoints
+
+- `GET /api/v1/clients/{id}`: Get a specific client by ID.
+- `GET /api/v1/clients`: Get a list of all clients.
+- `POST /api/v1/clients`: Create a new client.
+- `PUT /api/v1/clients/{id}`: Update an existing client.
+- `DELETE /api/v1/clients/{id}`: Delete a client.
+
+### [Additional Endpoints as Needed]
+
+## Dependencies
+
+List the main dependencies and technologies used in your project:
+
+- Spring Boot: The framework for building Java applications.
+- Spring Data JPA: For working with relational databases.
+- PostgreSQL: As the relational database management system.
+- Travis CI or GitHub Actions: For continuous integration and automated testing.
+- JUnit: For unit testing.
+- Postman: For API testing.
+
