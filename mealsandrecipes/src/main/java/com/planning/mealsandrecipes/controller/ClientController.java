@@ -3,6 +3,8 @@ package com.planning.mealsandrecipes.controller;
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +31,21 @@ public class ClientController {
     // Define an endpoint to retrieve all clients.
     @GetMapping
     public List<Client> getAllClients() {
-        return clientService.getAllClients();
+        List<Client> clients = clientService.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK).getBody();
     }
 
     // Define an endpoint to retrieve a client by their ID.
     @GetMapping("/{id}")
     public Optional<Client> getClientById(@PathVariable int id) {
-        return clientService.getClientById(id);
+        Optional<Client> client = clientService.getClientById(id);
+        Client client1 = client.get();
+        if (client1 != null) {
+            return new ResponseEntity<>(client, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(client, HttpStatus.NOT_FOUND).getBody();
+        }
+
     }
 
     // Define an endpoint to create a new client.
@@ -47,7 +57,12 @@ public class ClientController {
     // Define an endpoint to update an existing client.
     @PutMapping("/{id}")
     public Client updateClient(@PathVariable int id, @RequestBody Client updatedClient) {
-        return clientService.updateClient(id, updatedClient);
+        Client client = clientService.updateClient(id, updatedClient);
+        if (client != null) {
+            return new ResponseEntity<>(client, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(client, HttpStatus.NOT_FOUND).getBody();
+        }
     }
 
     // Define an endpoint to delete a client by their ID.

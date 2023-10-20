@@ -1,5 +1,11 @@
+import com.planning.mealsandrecipes.entity.Ingredient;
+import com.planning.mealsandrecipes.entity.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
@@ -20,13 +26,23 @@ public class RecipeController {
     // Define an endpoint to retrieve a recipe by its ID.
     @GetMapping("/{recipeId}")
     public Recipe getRecipe(@PathVariable Integer recipeId) {
-        return recipeService.getRecipeById(recipeId);
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        if (recipe != null) {
+            return new ResponseEntity<>(recipe, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(recipe, HttpStatus.NOT_FOUND).getBody();
+        }
     }
 
     // Define an endpoint to retrieve all recipes.
     @GetMapping
     public List<Recipe> getAllRecipes() {
-        return recipeService.getAllRecipes();
+        List<Recipe> recipes = recipeService.getAllRecipes();
+        if (recipes != null) {
+            return new ResponseEntity<>(recipes, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(recipes, HttpStatus.NOT_FOUND).getBody();
+        }
     }
 
     // Define an endpoint to update an existing recipe.

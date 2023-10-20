@@ -1,9 +1,12 @@
 package com.planning.mealsandrecipes.controller;
 
+import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.entity.Ingredient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -12,6 +15,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/ingredients")
@@ -32,14 +36,25 @@ public class IngredientController {
     @GetMapping(value = "/{id}")
     @Operation(summary = "Returns a specific ingredient based on given parameter.")
     public Ingredient getIngredient(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable Long id) {
-        return ingredientService.get(id);
+
+        Ingredient ingredient = ingredientService.get(id);
+        if (ingredient != null) {
+            return new ResponseEntity<>(ingredient, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(ingredient, HttpStatus.NOT_FOUND).getBody();
+        }
     }
 
     // Define an endpoint to get a list of all ingredients in the database.
     @GetMapping()
     @Operation(summary = "Returns a list of all ingredients in the database.")
     public List<Ingredient> getAllIngredients() {
-        return ingredientService.getAll();
+        List<Ingredient> ingredients = ingredientService.getAll();
+        if (ingredients != null) {
+            return new ResponseEntity<>(ingredient, HttpStatus.OK).getBody();
+        } else {
+            return new ResponseEntity<>(ingredient, HttpStatus.NOT_FOUND).getBody();
+        }
     }
 
     // Define exception handling for NoSuchElementException.
