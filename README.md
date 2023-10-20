@@ -21,14 +21,6 @@ Key Features:
 - Meal Planning: Plan daily, weekly, or monthly meals, and generate grocery lists based on the meal plan.
 - Nutrition Analysis: Calculate the nutritional value of meals based on ingredients and quantities.
 
-### Client Types
-
-Our project is designed to serve two main types of clients:
-
-1. Senior Citizens Meal Planning App: Targeted at senior citizens with dietary restrictions, this app allows them to plan meals based on specific ingredients and nutritional values.
-
-2. Fitness Meal Planner App: Fitness enthusiasts can use our service to customize and monitor their diet plans to meet their fitness goals.
-
 ### Testing
 
 During the development of this project, we will perform various types of testing, including:
