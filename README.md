@@ -1,4 +1,4 @@
-# 🍽️ Meals and Recipes Planner 📆
+# 🥘 Meals and Recipes Planner 📆
 
 ## Team Members:
 - Ritika Deshpande (rgd2127)
