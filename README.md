@@ -161,31 +161,72 @@ To run the application, follow these steps:
 
 ## API Endpoints
 
-### Ingredient Endpoints
+## Error Handling
 
-- `GET /api/v1/ingredients/{id}`: Get a specific ingredient by ID.
-- `GET /api/v1/ingredients`: Get a list of all ingredients.
-- `POST /api/v1/ingredients`: Create a new ingredient.
-- `PUT /api/v1/ingredients/{id}`: Update an existing ingredient.
-- `DELETE /api/v1/ingredients/{id}`: Delete an ingredient.
+The API follows standard HTTP status codes for error responses. In case of an error, you will receive an appropriate status code and a JSON response with details.
 
-### Recipe Endpoints
+## Ingredient Endpoints
 
-- `GET /api/v1/recipes/{id}`: Get a specific recipe by ID.
-- `GET /api/v1/recipes`: Get a list of all recipes.
-- `POST /api/v1/recipes`: Create a new recipe.
-- `PUT /api/v1/recipes/{id}`: Update an existing recipe.
-- `DELETE /api/v1/recipes/{id}`: Delete a recipe.
+### 1. Get a Specific Ingredient
 
-### Client Endpoints
+- **Endpoint**: `GET /api/v1/ingredients/{id}`
+- **Description**: Retrieve a specific ingredient by its unique identifier (ID).
+- **Example Request**: `GET /api/v1/ingredients/1`
+- **Response**: Returns the ingredient with the specified ID.
 
-- `GET /api/v1/clients/{id}`: Get a specific client by ID.
-- `GET /api/v1/clients`: Get a list of all clients.
-- `POST /api/v1/clients`: Create a new client.
-- `PUT /api/v1/clients/{id}`: Update an existing client.
-- `DELETE /api/v1/clients/{id}`: Delete a client.
+### 2. Get All Ingredients
 
+- **Endpoint**: `GET /api/v1/ingredients`
+- **Description**: Retrieve a list of all ingredients stored in the database.
+- **Example Request**: `GET /api/v1/ingredients`
+- **Response**: Returns a list of all ingredients.
 
+### 3. Create a New Ingredient
+
+- **Endpoint**: `POST /api/v1/ingredients`
+- **Description**: Create a new ingredient by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/ingredients`
+- **Request Body**: Contains ingredient details.
+- **Response**: Returns the newly created ingredient.
+
+### 4. Update an Existing Ingredient
+
+- **Endpoint**: `PUT /api/v1/ingredients/{id}`
+- **Description**: Update an existing ingredient by specifying its ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/ingredients/1`
+- **Request Body**: Contains updated ingredient details.
+- **Response**: Returns the updated ingredient.
+
+### 5. Delete an Ingredient
+
+- **Endpoint**: `DELETE /api/v1/ingredients/{id}`
+- **Description**: Delete an ingredient with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/ingredients/1`
+- **Response**: No content (204) if the ingredient is successfully deleted.
+
+## Recipe Endpoints
+
+### 1. Get a Specific Recipe
+
+- **Endpoint**: `GET /api/v1/recipes/{id}`
+- **Description**: Retrieve a specific recipe by its unique identifier (ID).
+- **Example Request**: `GET /api/v1/recipes/1`
+- **Response**: Returns the recipe with the specified ID.
+
+### 2. Get All Recipes
+
+- **Endpoint**: `GET /api/v1/recipes`
+- **Description**: Retrieve a list of all recipes stored in the database.
+- **Example Request**: `GET /api/v1/recipes`
+- **Response**: Returns a list of all recipes.
+
+### 3. Create a New Recipe
+
+- **Endpoint**: `POST /api/v1/recipes`
+- **Description**: Create a new recipe by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/recipes`
+- **Request Body**: Contains recipe details.
+- **Response**: Returns the newly created recipe.
 
 ## Dependencies
 
