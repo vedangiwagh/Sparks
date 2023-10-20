@@ -1,0 +1,133 @@
+{
+  "test_cases": [
+    {
+      "name": "Test Case 1: Get Ingredient by ID",
+      "description": "Test retrieving an ingredient by its ID",
+      "request": {
+        "method": "GET",
+        "url": "/api/v1/ingredients/1"
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "name": "Example Ingredient",
+          "calories": 100
+        }
+      }
+    },
+    {
+      "name": "Test Case 2: Create Ingredient",
+      "description": "Test creating a new ingredient",
+      "request": {
+        "method": "POST",
+        "url": "/api/v1/ingredients",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "New Ingredient",
+          "calories": 120
+        }
+      },
+      "expected_response": {
+        "status_code": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 2,
+          "name": "New Ingredient",
+          "calories": 120
+        }
+      }
+    },
+    {
+      "name": "Test Case 3: Update Ingredient",
+      "description": "Test updating an existing ingredient",
+      "request": {
+        "method": "PUT",
+        "url": "/api/v1/ingredients/1",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Updated Ingredient",
+          "calories": 150
+        }
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "name": "Updated Ingredient",
+          "calories": 150
+        }
+      }
+    },
+    {
+      "name": "Test Case 4: Delete Ingredient",
+      "description": "Test deleting an ingredient by ID",
+      "request": {
+        "method": "DELETE",
+        "url": "/api/v1/ingredients/2"
+      },
+      "expected_response": {
+        "status_code": 204
+      }
+    },
+    {
+      "name": "Test Case 5: Get Recipe by ID",
+      "description": "Test retrieving a recipe by its ID",
+      "request": {
+        "method": "GET",
+        "url": "/api/v1/recipes/1"
+      },
+      "expected_response": {
+        "status_code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "name": "Example Recipe",
+          "instructions": "Step 1, Step 2",
+          "servings": 4
+        }
+      }
+    },
+    {
+      "name": "Test Case 6: Create Recipe",
+      "description": "Test creating a new recipe",
+      "request": {
+        "method": "POST",
+        "url": "/api/v1/recipes",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "New Recipe",
+          "instructions": "Step 1, Step 2",
+          "servings": 2
+        }
+      },
+      "expected_response": {
+        "status_code": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 2,
+          "name": "New Recipe",
+          "instructions": "Step 1, Step 2",
+          "servings": 2
+        }
+      }
+    },
+   
