@@ -2,7 +2,6 @@ package com.planning.mealsandrecipes;
 
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.repository.ClientRepo;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,14 +16,14 @@ public class MealsandrecipesApplication {
 		SpringApplication.run(MealsandrecipesApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner houses(ClientRepo houseRepository) {
-		return (args) -> {
-			houseRepository.deleteAll();
-
-			Stream.of(new Client())
-					.forEach(houseRepository::save);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner houses(ClientRepo houseRepository) {
+//		return (args) -> {
+//			houseRepository.deleteAll();
+//
+//			Stream.of(new Client())
+//					.forEach(houseRepository::save);
+//		};
+//	}
 
 }

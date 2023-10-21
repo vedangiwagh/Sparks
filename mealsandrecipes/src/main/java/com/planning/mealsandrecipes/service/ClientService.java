@@ -15,15 +15,15 @@ import java.util.List;
 
 public class ClientService {
 
-    private final ClientRepo clientRepo;
+//    private final ClientRepo clientRepo;
 
-    @Autowired
-    public ClientService(ClientRepo clientRepo) {
-        this.clientRepo = clientRepo;
-    }
+//    @Autowired
+//    public ClientService(ClientRepo clientRepo) {
+//        this.clientRepo = clientRepo;
+//    }
 
     // Retrieve a list of all clients.
-    public List<Client> getAllClients() {
-        return (List<Client>) clientRepo.findAll();
-    }
+//    public List<Client> getAllClients() {
+//        return (List<Client>) clientRepo.findAll();
+//    }
 }

@@ -29,7 +29,8 @@ build/
 !**/src/test/**/build/
 
 sparksmealplan-3902876ce98d.json
-
-
+credentials.json
+service_account.json
+test.json
 ### VS Code ###
 .vscode/
