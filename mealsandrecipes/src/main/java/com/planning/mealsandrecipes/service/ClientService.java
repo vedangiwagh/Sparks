@@ -1,6 +1,7 @@
 package com.planning.mealsandrecipes.service;
 
 import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.repository.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,18 +13,31 @@ import java.util.List;
 
 @Service
 @Component
-
 public class ClientService {
+    @Autowired
+    private ClientRepo clientRepo;
 
-//    private final ClientRepo clientRepo;
+    public List<Client> getAllclient() {
+        return clientRepo.findAll();
+    }
 
-//    @Autowired
-//    public ClientService(ClientRepo clientRepo) {
-//        this.clientRepo = clientRepo;
-//    }
+    // create Client rest API
+    public Client createClient(Client Client) {
+        return clientRepo.save(Client);
+    }
 
-    // Retrieve a list of all clients.
-//    public List<Client> getAllClients() {
-//        return (List<Client>) clientRepo.findAll();
-//    }
+    public Client getByClientId(Long id){
+        Client client = clientRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException
+                        ("Client not exist with id :" + id));
+        return client;
+    }
+    public Client updateClientById(Client clientDetails, Long id){
+        Client client = clientRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException
+                        ("Client not exist with id :" + id));
+        client.setName(clientDetails.getName());
+        Client updatedClient = clientRepo.save(client);
+        return updatedClient;
+    }
 }
