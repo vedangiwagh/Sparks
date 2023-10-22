@@ -1,9 +1,12 @@
 package com.planning.mealsandrecipes.controller;
 
+import com.planning.mealsandrecipes.entity.Ingredient;
+import com.planning.mealsandrecipes.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -21,12 +24,12 @@ import java.util.NoSuchElementException;
         maxAge = 3800,
         allowCredentials = "true"
 )
-@AllArgsConstructor
 // Tag the controller for Swagger documentation.
 @Tag(description = "Set of endpoints for ingredients.", name = "Ingredient Controller")
 public class IngredientController {
 
-    private final IngredientService ingredientService;
+    @Autowired
+    private IngredientService ingredientService;
 
     // Define an endpoint to get a specific ingredient by its ID.
     @GetMapping(value = "/{id}")
@@ -47,7 +50,7 @@ public class IngredientController {
     public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse(e.getMessage()));
+                .body(e.getMessage());
     }
 
     // Define a more general exception handler to handle various exceptions.
@@ -72,6 +75,6 @@ public class IngredientController {
         }
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse(message));
+                .body((message));
     }
 }

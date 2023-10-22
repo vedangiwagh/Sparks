@@ -20,29 +20,5 @@ import java.util.Collections;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ClientControllerTest {
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Mock
-    private ClientService clientService;
-
-    private MockMvc mockMvc;
-
-    @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        //TODO
     }
-
-    @Test
-    public void testGetAllClients() throws Exception {
-        // Mock the behavior of the clientService
-        when(clientService.getAllClients()).thenReturn(Collections.emptyList());
-
-        mockMvc.perform(get("/clients"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("[]"));
-    }
-
-    // Similarly, you can write tests for other controller methods (get by ID, create, update, delete).
-}

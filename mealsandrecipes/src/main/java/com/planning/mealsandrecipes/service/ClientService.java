@@ -14,13 +14,8 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
-    private final ClientRepo clientRepo;
-
     @Autowired
-    public ClientService(ClientRepo clientRepo) {
-        this.clientRepo = clientRepo;
-    }
-
+    private ClientRepo clientRepo;
     // Retrieve a list of all clients.
     public List<Client> getAllClients() {
         return (List<Client>) clientRepo.findAll();

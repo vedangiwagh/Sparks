@@ -1,15 +1,17 @@
+package com.planning.mealsandrecipes.controller;
+
+import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
 public class RecipeController {
-    private final RecipeService recipeService;
-
     @Autowired
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
+    private RecipeService recipeService;
 
     // Define an endpoint to create a new recipe.
     @PostMapping

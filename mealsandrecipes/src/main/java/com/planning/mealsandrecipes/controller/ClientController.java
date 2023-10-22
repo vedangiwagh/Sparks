@@ -19,12 +19,8 @@ import java.util.Optional;
 public class ClientController {
 
     // Inject the ClientService for handling client-related operations.
-    private final ClientService clientService;
-
     @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private ClientService clientService;
 
     // Define an endpoint to retrieve all clients.
     @GetMapping
