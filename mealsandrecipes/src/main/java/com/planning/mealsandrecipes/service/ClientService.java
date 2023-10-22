@@ -34,8 +34,10 @@ public class ClientService {
     // Update an existing client by ID with the provided data.
     public Client updateClient(int id, Client updatedClient) {
         if (clientRepo.existsById(id)) {
+            Client client = new Client();
             // Optionally, set the client's ID if needed: updatedClient.setClientID(id);
-            return clientRepo.save(updatedClient);
+            client.setName(updatedClient.getName());
+            return clientRepo.save(client);
         }
         return null; // Handle the case where the client doesn't exist
     }
