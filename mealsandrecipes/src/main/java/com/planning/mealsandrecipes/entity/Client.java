@@ -29,9 +29,11 @@ public class Client {
     }
 
     public Client() {
+        super();
     }
 
     public Client(String name) {
+        super();
         this.name = name;
     }
 }

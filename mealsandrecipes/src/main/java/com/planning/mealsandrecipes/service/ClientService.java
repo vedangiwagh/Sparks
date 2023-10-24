@@ -1,6 +1,7 @@
 package com.planning.mealsandrecipes.service;
 
 import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.repository.ClientRepo;
 
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,8 +22,11 @@ public class ClientService {
     }
 
     // Retrieve a client by their ID.
-    public Optional<Client> getClientById(int id) {
-        return clientRepo.findById(id);
+    public Client getClientById(int id) {
+        Client client = clientRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException
+                        ("Client not exist with id :" + id));
+        return client;
     }
 
     // Create a new client.
@@ -32,14 +35,14 @@ public class ClientService {
     }
 
     // Update an existing client by ID with the provided data.
-    public Client updateClient(int id, Client updatedClient) {
-        if (clientRepo.existsById(id)) {
-            Client client = new Client();
-            // Optionally, set the client's ID if needed: updatedClient.setClientID(id);
-            client.setName(updatedClient.getName());
-            return clientRepo.save(client);
-        }
-        return null; // Handle the case where the client doesn't exist
+    public Client updateClient(int id, Client clientDetails) {
+        Client client = clientRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException
+                        ("Client not exist with id :" + id));
+        client.setName(clientDetails.getName());
+        Client updatedClient = clientRepo.save(client);
+        System.out.println("CLIENT NOT FOUND");
+        return updatedClient;
     }
 
     // Delete a client by their ID.
