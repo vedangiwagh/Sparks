@@ -33,13 +33,10 @@ public class RecipeController {
 
     // Define an endpoint to update an existing recipe.
     @PutMapping("/{recipeId}")
-    public void updateRecipe(@PathVariable Integer recipeId, @RequestBody Recipe recipe) {
+    public Recipe updateRecipe(@PathVariable Integer recipeId, @RequestBody Recipe recipe) {
         // Check if the existing recipe with the given ID exists.
-        Recipe existingRecipe = recipeService.getRecipeById(recipeId);
-        if (existingRecipe != null) {
-            // If it exists, update the recipe with the provided data.
-            recipeService.updateRecipe(recipe);
-        }
+        return recipeService.updateRecipe(recipeId, recipe);
+
     }
 
     // Define an endpoint to delete a recipe by its ID.

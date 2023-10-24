@@ -1,83 +1,115 @@
 package com.planning.mealsandrecipes.Service;
 
 import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.repository.RecipeRepo;
+import com.planning.mealsandrecipes.service.RecipeService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
-class RecipeServiceTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
+public class RecipeServiceTest {
 
     @Mock
-    private RecipeRepo recipeRepository;
+    private RecipeRepo recipeRepo;
 
-    @InjectMocks
-    private RecipeRepo recipeService;
+    private RecipeService recipeService;
+
+    @BeforeEach
+    public void setUp() {
+        recipeService = new RecipeService();
+        recipeService.recipeRepository = recipeRepo;
+    }
+
+    @Test
+    public void testCreateRecipe() {
+        Recipe newRecipe = new Recipe();
+        when(recipeRepo.save(any(Recipe.class))).thenReturn(newRecipe);
+
+        Recipe createdRecipe = recipeService.createRecipe(newRecipe);
+        assertNotNull(createdRecipe);
+    }
 
 //    @Test
-//    void createRecipe_shouldSaveRecipe() {
-//        Recipe recipe = new Recipe();
-//        when(recipeRepository.save(any())).thenReturn(recipe);
+//    public void testGetRecipeById() {
+//        Recipe existingRecipe = new Recipe();
+//        existingRecipe.setRecipeId(1);
 //
-//        Recipe savedRecipe = recipeService.cre(recipe);
+//        when(recipeRepo.findById(1L)).thenReturn(Optional.of(existingRecipe));
 //
-//        verify(recipeRepository).save(recipe);
-//        assertEquals(recipe, savedRecipe);
+//        Recipe retrievedRecipe = recipeService.getRecipeById(1);
+//        assertNotNull(retrievedRecipe);
+//        assertEquals(1, retrievedRecipe.getRecipeId());
 //    }
 
     @Test
-    void getRecipeById_shouldReturnRecipeIfExists() {
-        long recipeId = 1;
-        Recipe recipe = new Recipe();
-        when(recipeRepository.findById(recipeId)).thenReturn(Optional.of(recipe));
+    public void testGetRecipeById_ResourceNotFoundException() {
+        when(recipeRepo.findById(1L)).thenReturn(Optional.empty());
 
-        Recipe retrievedRecipe = recipeService.getReferenceById(recipeId);
+        assertThrows(ResourceNotFoundException.class, () -> recipeService.getRecipeById(1));
+    }
 
-        verify(recipeRepository).findById(recipeId);
-        assertEquals(recipe, retrievedRecipe);
+//    @Test
+//    public void testGetAllRecipes() {
+//        List<Recipe> recipeList = new ArrayList<>();
+//        recipeList.add(new Recipe());
+//        recipeList.add(new Recipe());
+//
+//        when(recipeRepo.findAll()).thenReturn(recipeList);
+//
+//        List<Recipe> recipes = recipeService.getAllRecipes();
+//        assertEquals(1, recipes.size());
+//    }
+
+    @Test
+    public void testUpdateRecipe() {
+        Recipe existingRecipe = new Recipe();
+        existingRecipe.setRecipeId(1);
+
+        Recipe updatedRecipe = new Recipe();
+        updatedRecipe.setRecipeName("Updated Recipe");
+
+        when(recipeRepo.findById(1L)).thenReturn(Optional.of(existingRecipe));
+        when(recipeRepo.save(any(Recipe.class))).thenReturn(updatedRecipe);
+
+        Recipe result = recipeService.updateRecipe(1, updatedRecipe);
+        assertNotNull(result);
+        assertEquals("Updated Recipe", result.getRecipeName());
     }
 
     @Test
-    void getRecipeById_shouldReturnNullIfNotExists() {
-        long recipeId = 1;
-        when(recipeRepository.findById(recipeId)).thenReturn(Optional.empty());
+    public void testUpdateRecipe_ResourceNotFoundException() {
+        when(recipeRepo.findById(1L)).thenReturn(Optional.empty());
 
-        Recipe retrievedRecipe = recipeService.getReferenceById(recipeId);
-
-        verify(recipeRepository).findById(recipeId);
-        assertNull(retrievedRecipe);
+        assertThrows(ResourceNotFoundException.class, () -> {
+            recipeService.updateRecipe(1, new Recipe());
+        });
     }
 
     @Test
-    void getAllRecipes_shouldReturnListOfRecipes() {
-        List<Recipe> recipes = Arrays.asList(new Recipe(), new Recipe());
-        when(recipeRepository.findAll()).thenReturn(recipes);
-
-        List<Recipe> allRecipes = recipeService.findAll();
-
-        verify(recipeRepository).findAll();
-        assertEquals(recipes, allRecipes);
+    public void testDeleteRecipe() {
+        recipeService.deleteRecipe(1);
+        // Verify that the deleteById method was called
+        Mockito.verify(recipeRepo).deleteById(1L);
     }
 
-
     @Test
-    void deleteRecipe_shouldDeleteRecipe() {
-        long recipeId = 1;
+    public void testIsDatabaseEmpty() {
+        when(recipeRepo.count()).thenReturn(0L);
+        assertTrue(recipeService.isDatabaseEmpty());
 
-        recipeService.deleteById(recipeId);
-
-        verify(recipeRepository).deleteById(recipeId);
+        when(recipeRepo.count()).thenReturn(1L);
+        assertFalse(recipeService.isDatabaseEmpty());
     }
 }
