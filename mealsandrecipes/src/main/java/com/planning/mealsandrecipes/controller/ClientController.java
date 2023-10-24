@@ -30,7 +30,7 @@ public class ClientController {
 
     // Define an endpoint to retrieve a client by their ID.
     @GetMapping("/{id}")
-    public Optional<Client> getClientById(@PathVariable int id) {
+    public Client getClientById(@PathVariable int id) {
         return clientService.getClientById(id);
     }
 
