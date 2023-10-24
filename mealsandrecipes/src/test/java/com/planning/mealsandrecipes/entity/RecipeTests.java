@@ -1,50 +1,47 @@
 package com.planning.mealsandrecipes.entity;
 
+import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.entity.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RecipeTests {
 
-    private Recipe recipe1;
-    private Recipe recipe2;
+    private Recipe recipe;
 
     @BeforeEach
     public void setUp() {
-        recipe1 = new Recipe();
-        recipe1.setRecipeId(1);
-        recipe1.setRecipeName("Spaghetti Carbonara");
-        recipe1.setDescription("A classic Italian pasta dish.");
-        recipe1.setInstructions("Cook pasta, mix with egg and cheese sauce, add pancetta.");
-        recipe1.setPreparationTime(15);
-        recipe1.setCookingTime(20);
-
-        recipe2 = new Recipe();
-        recipe2.setRecipeId(2);
-        recipe2.setRecipeName("Chicken Alfredo");
-        recipe2.setDescription("Creamy chicken pasta.");
-        recipe2.setInstructions("Cook chicken, mix with creamy sauce, serve over pasta.");
-        recipe2.setPreparationTime(20);
-
+        // Create a sample recipe for testing
+        Client client = new Client();
+        recipe = new Recipe(client, "Sample Recipe", "Sample Description",
+                "Sample Instructions", 30, 60);
     }
 
     @Test
-    public void testEquals() {
-        assertEquals(recipe1, recipe1);
-        assertNotEquals(recipe1, recipe1);
-    }
+    public void testGettersAndSetters() {
+        assertEquals("Sample Recipe", recipe.getRecipeName());
+        assertEquals("Sample Description", recipe.getDescription());
+        assertEquals("Sample Instructions", recipe.getInstructions());
+        assertEquals(30, recipe.getPreparationTime());
+        assertEquals(60, recipe.getCookingTime());
 
-    @Test
-    public void testHashCode() {
-        assertEquals(recipe1.hashCode(), recipe2.hashCode());
-        assertNotEquals(recipe1.hashCode(), recipe2.hashCode());
-    }
+        // Test setters
+        recipe.setRecipeName("New Recipe Name");
+        assertEquals("New Recipe Name", recipe.getRecipeName());
 
-    @Test
-    public void testGetName() {
-        assertEquals("Chicken Alfredo", recipe2.getRecipeName());
+        recipe.setDescription("New Description");
+        assertEquals("New Description", recipe.getDescription());
+
+        recipe.setInstructions("New Instructions");
+        assertEquals("New Instructions", recipe.getInstructions());
+
+        recipe.setPreparationTime(45);
+        assertEquals(45, recipe.getPreparationTime());
+
+        recipe.setCookingTime(75);
+        assertEquals(75, recipe.getCookingTime());
     }
 
 }
