@@ -99,7 +99,7 @@ public class IngredientControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
 
         // Ensure the ingredient was deleted
-        Ingredient retrievedIngredient = ingredientService.get(savedIngredient.getId());
+        Ingredient retrievedIngredient = ingredientService.getById(savedIngredient.getId());
         assertNull(retrievedIngredient);
     }
 }

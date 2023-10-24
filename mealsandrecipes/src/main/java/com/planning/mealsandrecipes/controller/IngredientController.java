@@ -1,5 +1,6 @@
 package com.planning.mealsandrecipes.controller;
 
+import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,13 +18,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(path = "api/v1/ingredients")
+@RequestMapping(path = "/ingredients")
 // Define CrossOrigin to allow requests from specific origins.
-@CrossOrigin(
-        origins = {"http://localhost:8000"},
-        maxAge = 3800,
-        allowCredentials = "true"
-)
 // Tag the controller for Swagger documentation.
 @Tag(description = "Set of endpoints for ingredients.", name = "Ingredient Controller")
 public class IngredientController {
@@ -35,7 +31,7 @@ public class IngredientController {
     @GetMapping(value = "/{id}")
     @Operation(summary = "Returns a specific ingredient based on given parameter.")
     public Ingredient getIngredient(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable Long id) {
-        return ingredientService.get(id);
+        return ingredientService.getById(id);
     }
 
     // Define an endpoint to get a list of all ingredients in the database.
@@ -43,6 +39,22 @@ public class IngredientController {
     @Operation(summary = "Returns a list of all ingredients in the database.")
     public List<Ingredient> getAllIngredients() {
         return ingredientService.getAll();
+    }
+
+
+    @PostMapping
+    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
+        return ingredientService.save(ingredient);
+    }
+
+    @PostMapping("/bulk")
+    public List<Ingredient> createIngredients(@RequestBody List<Ingredient> ingredients) {
+        return ingredientService.saveAll(ingredients);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteIngredient(@PathVariable Long id) {
+        ingredientService.delete(id);
     }
 
     // Define exception handling for NoSuchElementException.

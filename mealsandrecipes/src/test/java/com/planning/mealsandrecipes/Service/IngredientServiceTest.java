@@ -29,7 +29,7 @@ public class IngredientServiceTest {
         assertNotNull(savedIngredient.getId());
 
         Long ingredientId = savedIngredient.getId();
-        Ingredient retrievedIngredient = ingredientService.get(ingredientId);
+        Ingredient retrievedIngredient = ingredientService.getById(ingredientId);
         assertNotNull(retrievedIngredient);
         assertEquals("Test Ingredient", retrievedIngredient.getName());
     }
@@ -56,7 +56,7 @@ public class IngredientServiceTest {
         Long ingredientId = savedIngredient.getId();
 
         ingredientService.delete(ingredientId);
-        Ingredient retrievedIngredient = ingredientService.get(ingredientId);
+        Ingredient retrievedIngredient = ingredientService.getById(ingredientId);
         assertNull(retrievedIngredient);
     }
 }
