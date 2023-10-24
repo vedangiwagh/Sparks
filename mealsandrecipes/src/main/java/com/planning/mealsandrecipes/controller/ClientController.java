@@ -18,33 +18,35 @@ import java.util.Optional;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientService clientService;
-
+    // Inject the ClientService for handling client-related operations.
     @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private ClientService clientService;
 
+    // Define an endpoint to retrieve all clients.
     @GetMapping
     public List<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
+    // Define an endpoint to retrieve a client by their ID.
     @GetMapping("/{id}")
     public Optional<Client> getClientById(@PathVariable int id) {
         return clientService.getClientById(id);
     }
 
+    // Define an endpoint to create a new client.
     @PostMapping
     public Client createClient(@RequestBody Client client) {
         return clientService.createClient(client);
     }
 
+    // Define an endpoint to update an existing client.
     @PutMapping("/{id}")
     public Client updateClient(@PathVariable int id, @RequestBody Client updatedClient) {
         return clientService.updateClient(id, updatedClient);
     }
 
+    // Define an endpoint to delete a client by their ID.
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable int id) {
         clientService.deleteClient(id);

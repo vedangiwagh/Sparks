@@ -1,11 +1,13 @@
 package com.planning.mealsandrecipes.repository;
 
-
+import com.planning.mealsandrecipes.entity.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+// RecipeRepository is a repository interface for the Recipe entity.
+// It extends JpaRepository to provide access to CRUD operations for recipes.
+public interface RecipeRepo extends JpaRepository<Recipe, Long> {
 
-    List<Recipe> findAllByOrderByUpdatedAtDesc();
+    // Custom query method to retrieve a list of recipes ordered by the updated timestamp in descending order.
 }

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sparksmealplan",
+  "private_key_id": "6bdb7c07af5820ea6721aa8e60b7ae967b60f4ee",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCileEiMnbaR2bz\nJOzTLJ1bDZAm4D7yOPOfdqrGpLGlqfyIjJsnsmfMwhcMd17l7B1DEzfrVrfoso9T\nmYSEXKXSWMZeWMfBvRr+8jKbVklS9Pdh2hTcuCgXPbLtrkL0sQdFwYPY8XQf3NPt\n266zwOuc8OTpRDxIbEaRbNWXXVyvWoZYgX3JsAn2iRi4I7VR9hZHIwoc/OMaLGAK\n5OBF86ciKVg0IwXyK4RLn6USsj2mp9gOO8dnlE/fAscvkdQfqY/Oxhz7DF041gM4\nOGAqLXs3oCyfzcJTrHwRGsIqDWEpGs5PM1vSyCm55zsqpwKheRKUgix4mpel5xDl\n/MZjotaRAgMBAAECgf8WCVlq8xg2IQA65zbiwMX9INdH4GgaedcHCn8N5LMMCgk7\neMp9Ksl4iyV+iNuPh7oOgtmTqPYld12znJSQtHDFSRJ/fcs9JYEtIxUMv3+5i/pc\n3Mp3F0ncNNa1mcfe/PxIL0zvk/9pUiqKuD4WuYiol2fz1OQZB1YoJnccO1QZF+DI\n2k5lzKJRuS4agB0fCZcLxoDONpHencVZ3Dbg3Fz3W0wSM+xKNJbJfbHBhylPL9f5\nlDKh6XiQwV2nZbUM3yUYWRd7w275tu/Fhfw7vgt0I2mgI08xEJw9aFdiYSNUYMoH\n1wpdq/dUbadOvVpolRK/9Yx6sQNjyjeCOWMCqi0CgYEAz+c2y76egUyzadt5OUYx\nK3TQdPXejSwldNYU5Dobx6niROfuv2LWoGIJKqRMazCozmltLqqjDG+3LoikWXwH\nfWobms1fllJ5YDjscnAoZmQzhhcfKZKtJz8LNkGoOqSL4c2dGfsEgvpsaj4eXMnh\noszCjYKhj96a8Ts6fiPSg/0CgYEAyDLI6ZCudiuugkgoZ48CpJ/steIq5Q+SYU2K\nXcKnmQCcI+wZ3EU9vf9CJrBuMQee4w09xYt6AkgJYl6Dx1lV9mYeGFC1FemoZmwp\nRzqpaeEFM7FVNPJj8tmwLfnYzllRLg3lG8CS1d200Tf9su6lgAddwoYKg0R03o+n\ng4NsvyUCgYBeLedstJUpDY3YzktD3sA3Z1tnIFoIqY7uNmyQVqJu+E4/2LEWkbeY\nP9DXOEZF6G0P1EJZeYMTByh8M/n/b2gVMBQBNDew6PuC00aJMLWcbJfKjn7XXlKC\nDNUPZv7GUfPr/jDErCmHC9pA5pLqhalpDkizwhFeEwEtdh8xNRkQIQKBgEL0KRlk\nF9TRmxVbSJgJzhp8mc/iifH9mTkNk77zwNV8zLt+1M9EIPgQDHGgA9pF8C+DWCtf\nEDj/GpRZg70B9avoTxxWsZlYgcdvWQbHaa1NYk39er+waRjpEPDvZEDuwiWi5AK6\nDuGTuktWbHSRN6xvyj2qUo3AMU3VwXJMW+w5AoGAPBaYQb3zOXW64hfhHO+XxAmA\nJ4Lkgy8bqnem5arIui0aW3HDQ5CZEKws8juLtPyllOQpAZzG+tGZ8M97eUz/ce3V\nkKftfexGMTxZLSBme1okt3j1NkJl/6X4pQEmJwwMogNGA8JLGEHB+b6ZhHOEQWXb\nUbIaIjMCu9mdUsbwJ6Q=\n-----END PRIVATE KEY-----\n",
+  "client_email": "test-connect@sparksmealplan.iam.gserviceaccount.com",
+  "client_id": "108716993242866104801",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/test-connect%40sparksmealplan.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

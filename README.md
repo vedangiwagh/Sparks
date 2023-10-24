@@ -1,4 +1,4 @@
-# 🥘 SPARKS plans your meals 🍽️ 
+# 🥘 Meals and Recipes Planner 📆
 
 ## Team Members:
 - Ritika Deshpande (rgd2127)
@@ -10,37 +10,38 @@
 
 **Programming Language**: Java
 
-**GitHub Repository**: [Sparks on GitHub](https://github.com/vedangiwagh/Sparks)
-
 ## Project Overview
 
-### Part 2: Project Description
+### Project Description
 
-Our project aims to create a set of APIs that assist users in meal planning, online grocery ordering, and nutritional value analysis. These APIs can be integrated into various applications, allowing users to plan their meals, order groceries, and obtain nutritional information.
+Our project is a service that helps users plan their meals, manage recipes, and track nutritional values. Users can create, store, update, and retrieve recipes, plan their meals, and analyze the nutritional content of their diet. This project offers a comprehensive set of APIs that can be integrated into various applications for meal planning and nutrition tracking.
 
 Key Features:
-- Recipe Management APIs: Create, store, and update recipes in the database. Generate grocery lists based on recipe requirements and ingredients.
-- Meal Planning API: Create and manage meal plans. Generate grocery lists based on meal plans.
-- Nutrition Value API: Calculate the nutritional value of meal plans based on ingredients and quantities.
+- Recipe Management: Create, store, update, and retrieve recipes in the database.
+- Meal Planning: Plan daily, weekly, or monthly meals, and generate grocery lists based on the meal plan.
+- Nutrition Analysis: Calculate the nutritional value of meals based on ingredients and quantities.
 
-We will store persistent data, including selected recipes, meal schedules, dietary preferences, and user-specific dietary restrictions. This data can be accessed, modified, and retrieved by users at any time.
+### Testing
 
-### Part 3: Client Types
+During the development of this project, we will perform various types of testing, including:
 
-We envision two distinct kinds of clients that may use our service:
+- Unit Testing: Testing individual components and subroutines to ensure they work correctly.
+- API Testing/Integration Testing: Validating API functionality using tools like Postman to test load handling and concurrency.
+- Persistent Data Testing: Ensuring data consistency and persistence, including simulating service restarts to monitor data integrity.
 
-1. Senior Citizen Meal Planning App: Targeted towards senior citizens with dietary restrictions, this app can use our service to plan meals based on ingredients and nutritional values.
-2. Fitness Meal Planner App: Fitness enthusiasts who require strict dietary monitoring can use our service to tailor meals to their specific requirements.
+### Unit Testing Details
 
-### Part 4: Testing
+We use JUnit for unit testing in this project. Below are some key details:
 
-During the first iteration, we will perform the following types of testing:
+- Test Runner: JUnit
+- Test Cases: We have written unit tests for key components and functions to ensure they work correctly.
+- Edge Cases: We've covered edge cases and error scenarios in our unit tests.
+- Mocking: Mockito is used for mocking dependencies and simulating behavior.
+- Test Reports: Test results and reports are generated and stored for analysis.
 
-- Unit Testing: Testing individual subroutines and components in isolation, including edge cases and error scenarios.
-- API Testing/Integration Testing: Using tools like Postman, we will test the APIs for load handling and concurrency, ensuring they can handle multiple client instances.
-- Persistent Data Testing: To ensure data consistency, we will simulate service restarts and monitor data persistence using JUnit.
+### Software Engineering Tools
 
-### Part 5: Software Engineering Tools
+We use the following tools and technologies for our project:
 
 - Persistent Datastore: SQL Database
 - Build or Package Manager: Maven
@@ -50,84 +51,7 @@ During the first iteration, we will perform the following types of testing:
 - Test Runner for API Testing: Postman
 - Static Analysis Bug Finder: SonarQube
 
-
-## Table of Contents
-
-- [Project Structure](#project-structure)
-- [Files and Components](#files-and-components)
-- [How to Run](#how-to-run)
-- [API Endpoints](#api-endpoints)
-- [Dependencies](#dependencies)
-- [Contributing](#contributing)
-
-## Project Structure
-
-Explain the overall structure of your project. For example:
-
-- Backend
-  - Controllers
-  - Services
-  - Models (Entities)
-
-## Files and Components
-
-### Ingredient.java
-
-This file defines the `Ingredient` entity class, which represents ingredients used in the application.
-
-### IngredientController.java
-
-The `IngredientController` handles API endpoints related to ingredients.
-
-### Recipe.java
-
-This file defines the `Recipe` entity class, representing recipes in the application.
-
-### RecipeController.java
-
-The `RecipeController` manages API endpoints for recipes.
-
-## How to Run
-
-Explain how to run the project, including any prerequisites or setup. For example:
-
-1. Make sure you have Java and Maven installed.
-2. Clone the project repository.
-3. Configure the database connection in `application.properties`.
-4. Run the application using Maven: `mvn spring-boot:run`.
-
-## API Endpoints
-
-List and describe the available API endpoints, including input parameters and expected responses.
-
-### Ingredient Endpoints
-
-- `GET /api/v1/ingredients/{id}:` Get a specific ingredient by ID.
-- `GET /api/v1/ingredients:` Get a list of all ingredients.
-
-### Recipe Endpoints:
-- `GET /api/v1/recipes/{id}:` Get a specific recipe by ID.
-- `GET /api/v1/recipes:` Get a list of all recipes.
-- `GET /api/v1/recipes/user/{id}:` Get a list of all recipes for a specific user.
-- `POST /api/v1/recipes/add:` Add a new recipe.
-- `PUT /api/v1/recipes/{id}:` Edit a recipe.
-- `DELETE /api/v1/recipes/{id}:` Delete a recipe.
-
-## Dependencies
-
-List the main dependencies and technologies used in your project. For example:
-
-- **Spring Boot**: The framework for building Java applications.
-- **Spring Data JPA**: For working with relational databases.
-- **Swagger**: For API documentation.
-- **Travis CI or GitHub Actions**: For continuous integration and automated testing.
-- **JUnit**: For unit testing.
-- **Postman**: For API testing.
-- **SonarQube**: For static code analysis and identifying potential bugs.
-- **SQL Database**: For persistent data storage.
-
 ## Steps to run the Service 🎉 
-
 #### Clone the project
 ```bash
 git clone https://github.com/vedangiwagh/Sparks.git
@@ -159,3 +83,239 @@ mvnw clean install
 ```bash
 mvn spring-boot:run
 ```
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Files and Components](#files-and-components)
+- [How to Run](#how-to-run)
+- [API Endpoints](#api-endpoints)
+- [Dependencies](#dependencies)
+- [Contributing](#contributing)
+
+## Project Structure
+
+Our project is structured as follows:
+
+- Backend
+  - Controllers
+  - Services
+  - Models (Entities)
+
+## Files and Components
+
+### Ingredient.java
+
+`Ingredient.java` defines the `Ingredient` entity class that represents ingredients used in the application.
+
+### IngredientController.java
+
+The `IngredientController` manages API endpoints related to ingredients.
+
+### Recipe.java
+
+`Recipe.java` defines the `Recipe` entity class that represents recipes within the application.
+
+### RecipeController.java
+
+The `RecipeController` handles API endpoints for recipes, allowing users to perform operations like creating, updating, and deleting recipes.
+
+### Client.java
+
+`Client.java` defines the `Client` entity class that represents users or clients of the application.
+
+### ClientController.java
+
+The `ClientController` manages API endpoints for clients, enabling user-specific operations.
+
+### ClientService.java
+
+`ClientService.java` contains the business logic for handling client-related operations.
+
+### ClientRepo.java
+
+`ClientRepo.java` is the repository interface for the `Client` entity, allowing database interaction.
+
+### IngredientService.java
+
+`IngredientService.java` contains the business logic for handling ingredient-related operations.
+
+### IngredientRepository.java
+
+`IngredientRepository.java` is the repository interface for the `Ingredient` entity, allowing database interaction.
+
+### RecipeService.java
+
+`RecipeService.java` contains the business logic for handling recipe-related operations.
+
+### RecipeRepository.java
+
+`RecipeRepository.java` is the repository interface for the `Recipe` entity, allowing database interaction.
+
+### RecipeControllerTest.java
+
+`RecipeControllerTest.java` is the unit test class for testing the `RecipeController`.
+
+### RecipeServiceTest.java
+
+`RecipeServiceTest.java` is the unit test class for testing the `RecipeService`.
+
+### IngredientServiceTest.java
+
+`IngredientServiceTest.java` is the unit test class for testing the `IngredientService`.
+
+### IngredientTests.java
+
+`IngredientTests.java` is the unit test class for testing the `Ingredient` entity.
+
+### RecipeTest.java
+
+`RecipeTest.java` is the unit test class for testing the `Recipe` entity.
+
+
+
+## How to Run
+
+To run the application, follow these steps:
+
+1. Make sure you have Java and Maven installed.
+2. Clone the project repository.
+3. Configure the database connection in `application.properties`.
+4. Run the application using Maven: `mvn spring-boot:run`.
+
+## API Endpoints
+
+## Error Handling
+
+The API follows standard HTTP status codes for error responses. In case of an error, you will receive an appropriate status code and a JSON response with details.
+
+## Ingredient Endpoints
+
+### 1. Get a Specific Ingredient
+
+- **Endpoint**: `GET /api/v1/ingredients/{id}`
+- **Description**: Retrieve a specific ingredient by its unique identifier (ID).
+- **Example Request**: `GET /api/v1/ingredients/1`
+- **Response**: Returns the ingredient with the specified ID.
+
+### 2. Get All Ingredients
+
+- **Endpoint**: `GET /api/v1/ingredients`
+- **Description**: Retrieve a list of all ingredients stored in the database.
+- **Example Request**: `GET /api/v1/ingredients`
+- **Response**: Returns a list of all ingredients.
+
+### 3. Create a New Ingredient
+
+- **Endpoint**: `POST /api/v1/ingredients`
+- **Description**: Create a new ingredient by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/ingredients`
+- **Request Body**: Contains ingredient details.
+- **Response**: Returns the newly created ingredient.
+
+### 4. Update an Existing Ingredient
+
+- **Endpoint**: `PUT /api/v1/ingredients/{id}`
+- **Description**: Update an existing ingredient by specifying its ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/ingredients/1`
+- **Request Body**: Contains updated ingredient details.
+- **Response**: Returns the updated ingredient.
+
+### 5. Delete an Ingredient
+
+- **Endpoint**: `DELETE /api/v1/ingredients/{id}`
+- **Description**: Delete an ingredient with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/ingredients/1`
+- **Response**: No content (204) if the ingredient is successfully deleted.
+
+## Recipe Endpoints
+
+### 1. Get a Specific Recipe
+
+- **Endpoint**: `GET /api/v1/recipes/{id}`
+- **Description**: Retrieve a specific recipe by its unique identifier (ID).
+- **Example Request**: `GET /api/v1/recipes/1`
+- **Response**: Returns the recipe with the specified ID.
+
+### 2. Get All Recipes
+
+- **Endpoint**: `GET /api/v1/recipes`
+- **Description**: Retrieve a list of all recipes stored in the database.
+- **Example Request**: `GET /api/v1/recipes`
+- **Response**: Returns a list of all recipes.
+
+### 3. Create a New Recipe
+
+- **Endpoint**: `POST /api/v1/recipes`
+- **Description**: Create a new recipe by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/recipes`
+- **Request Body**: Contains recipe details.
+- **Response**: Returns the newly created recipe.
+
+### 4. Update an Existing Recipe
+
+- **Endpoint**: `PUT /api/v1/recipes/{id}`
+- **Description**: Update an existing recipe by specifying its ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/recipes/1`
+- **Request Body**: Contains updated recipe details.
+- **Response**: Returns the updated recipe.
+
+### 5. Delete a Recipe
+
+- **Endpoint**: `DELETE /api/v1/recipes/{id}`
+- **Description**: Delete a recipe with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/recipes/1`
+- **Response**: No content (204) if the recipe is successfully deleted.
+
+## Client Endpoints
+
+### 1. Get a Specific Client
+
+- **Endpoint**: `GET /api/v1/clients/{id}`
+- **Description**: Retrieve a specific client by their unique identifier (ID).
+- **Example Request**: `GET /api/v1/clients/1`
+- **Response**: Returns the client with the specified ID.
+
+### 2. Get All Clients
+
+- **Endpoint**: `GET /api/v1/clients`
+- **Description**: Retrieve a list of all clients stored in the database.
+- **Example Request**: `GET /api/v1/clients`
+- **Response**: Returns a list of all clients.
+
+### 3. Create a New Client
+
+- **Endpoint**: `POST /api/v1/clients`
+- **Description**: Create a new client by providing the necessary data in the request body.
+- **Example Request**: `POST /api/v1/clients`
+- **Request Body**: Contains client details.
+- **Response**: Returns the newly created client.
+
+### 4. Update an Existing Client
+
+- **Endpoint**: `PUT /api/v1/clients/{id}`
+- **Description**: Update an existing client by specifying their ID and providing updated data in the request body.
+- **Example Request**: `PUT /api/v1/clients/1`
+- **Request Body**: Contains updated client details.
+- **Response**: Returns the updated client.
+
+### 5. Delete a Client
+
+- **Endpoint**: `DELETE /api/v1/clients/{id}`
+- **Description**: Delete a client with the specified ID from the database.
+- **Example Request**: `DELETE /api/v1/clients/1`
+- **Response**: No content (204) if the client is successfully deleted.
+
+
+## Dependencies
+
+List the main dependencies and technologies used in your project:
+
+- Spring Boot: The framework for building Java applications.
+- Spring Data JPA: For working with relational databases.
+- PostgreSQL: As the relational database management system.
+- Travis CI or GitHub Actions: For continuous integration and automated testing.
+- JUnit: For unit testing.
+- Postman: For API testing.
+- Apache Maven Checkstyle Plugin: style checking
+

@@ -1,12 +1,12 @@
 package com.planning.mealsandrecipes.entity;
 
-import com.planning.mealsandrecipes.entity.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class RecipeTest {
+public class RecipeTests {
 
     private Recipe recipe1;
     private Recipe recipe2;
@@ -29,3 +29,22 @@ public class RecipeTest {
         recipe2.setPreparationTime(20);
 
     }
+
+    @Test
+    public void testEquals() {
+        assertEquals(recipe1, recipe1);
+        assertNotEquals(recipe1, recipe1);
+    }
+
+    @Test
+    public void testHashCode() {
+        assertEquals(recipe1.hashCode(), recipe2.hashCode());
+        assertNotEquals(recipe1.hashCode(), recipe2.hashCode());
+    }
+
+    @Test
+    public void testGetName() {
+        assertEquals("Chicken Alfredo", recipe2.getRecipeName());
+    }
+
+}
