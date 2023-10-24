@@ -108,6 +108,17 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
+    public void setRecipe(Recipe otherRecipe) {
+        this.client = otherRecipe.getClient();
+        this.recipeName = otherRecipe.getRecipeName();
+        this.description = otherRecipe.getDescription();
+        this.instructions = otherRecipe.getInstructions();
+        this.preparationTime = otherRecipe.getPreparationTime();
+        this.cookingTime = otherRecipe.getCookingTime();
+    }
+
+
+
     // Override the equals method to compare recipes by their ID.
     @Override
     public boolean equals(Object o) {
