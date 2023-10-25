@@ -1,3 +1,8 @@
+package com.planning.mealsandrecipes.service;
+
+import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.entity.Ingredient;
+import com.planning.mealsandrecipes.repository.IngredientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -5,7 +10,7 @@ import java.util.List;
 @Service
 public class IngredientService {
     @Autowired
-    private IngredientRepository ingredientRepository;
+    private IngredientRepo ingredientRepository;
 
     // Save an ingredient to the repository.
     public Ingredient save(Ingredient ingredient) {
@@ -13,7 +18,7 @@ public class IngredientService {
     }
 
     // Retrieve an ingredient by its ID.
-    public Ingredient get(Long id) {
+    public Ingredient getById(Long id) {
         return ingredientRepository.findById(id).orElse(null);
     }
 
@@ -26,4 +31,9 @@ public class IngredientService {
     public void delete(Long id) {
         ingredientRepository.deleteById(id);
     }
+
+    public List<Ingredient> saveAll(List<Ingredient> ingredientsList) {
+        return ingredientRepository.saveAll(ingredientsList);
+    }
+
 }

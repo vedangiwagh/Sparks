@@ -1,60 +1,94 @@
+package com.planning.mealsandrecipes.Service;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import com.planning.mealsandrecipes.entity.Ingredient;
+import com.planning.mealsandrecipes.repository.IngredientRepo;
+import com.planning.mealsandrecipes.service.IngredientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@Transactional
 public class IngredientServiceTest {
 
-    @Autowired
+    @InjectMocks
     private IngredientService ingredientService;
 
+    @Mock
+    private IngredientRepo ingredientRepository;
+
+    @BeforeEach
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
-    public void testSaveAndGetIngredient() {
+    public void testSaveIngredient() {
         Ingredient ingredient = new Ingredient();
-        ingredient.setName("Test Ingredient");
+        when(ingredientRepository.save(ingredient)).thenReturn(ingredient);
 
         Ingredient savedIngredient = ingredientService.save(ingredient);
-        assertNotNull(savedIngredient.getId());
 
-        Long ingredientId = savedIngredient.getId();
-        Ingredient retrievedIngredient = ingredientService.get(ingredientId);
-        assertNotNull(retrievedIngredient);
-        assertEquals("Test Ingredient", retrievedIngredient.getName());
+        assertEquals(ingredient, savedIngredient);
+    }
+
+    @Test
+    public void testGetIngredientById() {
+        Long id = 1L;
+        Ingredient ingredient = new Ingredient();
+        when(ingredientRepository.findById(id)).thenReturn(Optional.of(ingredient));
+
+        Ingredient retrievedIngredient = ingredientService.getById(id);
+
+        assertEquals(ingredient, retrievedIngredient);
+    }
+
+    @Test
+    public void testGetIngredientByIdNotFound() {
+        Long id = 1L;
+        when(ingredientRepository.findById(id)).thenReturn(Optional.empty());
+
+        Ingredient retrievedIngredient = ingredientService.getById(id);
+
+        assertNull(retrievedIngredient);
     }
 
     @Test
     public void testGetAllIngredients() {
-        Ingredient ingredient1 = new Ingredient();
-        ingredient1.setName("Ingredient 1");
-        ingredientService.save(ingredient1);
+        List<Ingredient> ingredients = new ArrayList<>();
+        when(ingredientRepository.findAll()).thenReturn(ingredients);
 
-        Ingredient ingredient2 = new Ingredient();
-        ingredient2.setName("Ingredient 2");
-        ingredientService.save(ingredient2);
+        List<Ingredient> allIngredients = ingredientService.getAll();
 
-        List<Ingredient> ingredients = ingredientService.getAll();
-        assertEquals(2, ingredients.size());
+        assertEquals(ingredients, allIngredients);
     }
 
     @Test
     public void testDeleteIngredient() {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setName("Ingredient to Delete");
-        Ingredient savedIngredient = ingredientService.save(ingredient);
-        Long ingredientId = savedIngredient.getId();
+        Long id = 1L;
+        doNothing().when(ingredientRepository).deleteById(id);
 
-        ingredientService.delete(ingredientId);
-        Ingredient retrievedIngredient = ingredientService.get(ingredientId);
-        assertNull(retrievedIngredient);
+        ingredientService.delete(id);
+
+        verify(ingredientRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    public void testSaveAllIngredients() {
+        List<Ingredient> ingredientsList = new ArrayList<>();
+        when(ingredientRepository.saveAll(ingredientsList)).thenReturn(ingredientsList);
+
+        List<Ingredient> savedIngredients = ingredientService.saveAll(ingredientsList);
+
+        assertEquals(ingredientsList, savedIngredients);
     }
 }

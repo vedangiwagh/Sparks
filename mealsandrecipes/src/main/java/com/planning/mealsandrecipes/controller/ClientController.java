@@ -3,8 +3,6 @@ package com.planning.mealsandrecipes.controller;
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,31 +19,19 @@ import java.util.Optional;
 public class ClientController {
 
     // Inject the ClientService for handling client-related operations.
-    private final ClientService clientService;
-
     @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private ClientService clientService;
 
     // Define an endpoint to retrieve all clients.
     @GetMapping
     public List<Client> getAllClients() {
-        List<Client> clients = clientService.getAllClients();
-        return new ResponseEntity<>(clients, HttpStatus.OK).getBody();
+        return clientService.getAllClients();
     }
 
     // Define an endpoint to retrieve a client by their ID.
     @GetMapping("/{id}")
-    public Optional<Client> getClientById(@PathVariable int id) {
-        Optional<Client> client = clientService.getClientById(id);
-        Client client1 = client.get();
-        if (client1 != null) {
-            return new ResponseEntity<>(client, HttpStatus.OK).getBody();
-        } else {
-            return new ResponseEntity<>(client, HttpStatus.NOT_FOUND).getBody();
-        }
-
+    public Client getClientById(@PathVariable int id) {
+        return clientService.getClientById(id);
     }
 
     // Define an endpoint to create a new client.
@@ -57,12 +43,7 @@ public class ClientController {
     // Define an endpoint to update an existing client.
     @PutMapping("/{id}")
     public Client updateClient(@PathVariable int id, @RequestBody Client updatedClient) {
-        Client client = clientService.updateClient(id, updatedClient);
-        if (client != null) {
-            return new ResponseEntity<>(client, HttpStatus.OK).getBody();
-        } else {
-            return new ResponseEntity<>(client, HttpStatus.NOT_FOUND).getBody();
-        }
+        return clientService.updateClient(id, updatedClient);
     }
 
     // Define an endpoint to delete a client by their ID.

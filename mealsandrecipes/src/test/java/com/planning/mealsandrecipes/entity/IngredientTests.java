@@ -53,3 +53,4 @@ public class IngredientTests {
         assertEquals("Salt", ingredient1.getName());
     }
 
+}

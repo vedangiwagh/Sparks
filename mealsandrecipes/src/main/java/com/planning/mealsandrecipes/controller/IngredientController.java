@@ -2,11 +2,12 @@ package com.planning.mealsandrecipes.controller;
 
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Ingredient;
+import com.planning.mealsandrecipes.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -15,46 +16,45 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/ingredients")
+@RequestMapping(path = "/ingredients")
 // Define CrossOrigin to allow requests from specific origins.
-@CrossOrigin(
-        origins = {"http://localhost:8000"},
-        maxAge = 3800,
-        allowCredentials = "true"
-)
-@AllArgsConstructor
 // Tag the controller for Swagger documentation.
 @Tag(description = "Set of endpoints for ingredients.", name = "Ingredient Controller")
 public class IngredientController {
 
-    private final IngredientService ingredientService;
+    @Autowired
+    private IngredientService ingredientService;
 
     // Define an endpoint to get a specific ingredient by its ID.
     @GetMapping(value = "/{id}")
     @Operation(summary = "Returns a specific ingredient based on given parameter.")
     public Ingredient getIngredient(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable Long id) {
-
-        Ingredient ingredient = ingredientService.get(id);
-        if (ingredient != null) {
-            return new ResponseEntity<>(ingredient, HttpStatus.OK).getBody();
-        } else {
-            return new ResponseEntity<>(ingredient, HttpStatus.NOT_FOUND).getBody();
-        }
+        return ingredientService.getById(id);
     }
 
     // Define an endpoint to get a list of all ingredients in the database.
     @GetMapping()
     @Operation(summary = "Returns a list of all ingredients in the database.")
     public List<Ingredient> getAllIngredients() {
-        List<Ingredient> ingredients = ingredientService.getAll();
-        if (ingredients != null) {
-            return new ResponseEntity<>(ingredient, HttpStatus.OK).getBody();
-        } else {
-            return new ResponseEntity<>(ingredient, HttpStatus.NOT_FOUND).getBody();
-        }
+        return ingredientService.getAll();
+    }
+
+
+    @PostMapping
+    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
+        return ingredientService.save(ingredient);
+    }
+
+    @PostMapping("/bulk")
+    public List<Ingredient> createIngredients(@RequestBody List<Ingredient> ingredients) {
+        return ingredientService.saveAll(ingredients);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteIngredient(@PathVariable Long id) {
+        ingredientService.delete(id);
     }
 
     // Define exception handling for NoSuchElementException.
@@ -62,7 +62,7 @@ public class IngredientController {
     public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse(e.getMessage()));
+                .body(e.getMessage());
     }
 
     // Define a more general exception handler to handle various exceptions.
@@ -87,6 +87,6 @@ public class IngredientController {
         }
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse(message));
+                .body((message));
     }
 }

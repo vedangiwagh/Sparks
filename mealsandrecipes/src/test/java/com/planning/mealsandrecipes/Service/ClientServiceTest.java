@@ -1,78 +1,96 @@
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+package com.planning.mealsandrecipes.Service;
 
 import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.repository.ClientRepo;
 import com.planning.mealsandrecipes.service.ClientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ClientServiceTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
-    @Mock
-    private ClientRepo clientRepository;
+public class ClientServiceTest {
 
     @InjectMocks
     private ClientService clientService;
 
+    @Mock
+    private ClientRepo clientRepo;
+
     @BeforeEach
     public void init() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testGetAllClients() {
-        // Mock the behavior of the clientRepository
-        when(clientRepository.findAll()).thenReturn(Collections.emptyList());
+        List<Client> clients = new ArrayList<>();
+        clients.add(new Client("Client 1"));
+        clients.add(new Client("Client 2"));
 
-        List<Client> clients = clientService.getAllClients();
-        assertTrue(clients.isEmpty());
+        when(clientRepo.findAll()).thenReturn(clients);
+
+        List<Client> result = clientService.getAllClients();
+        assertEquals(2, result.size());
     }
 
     @Test
     public void testGetClientById() {
-        int clientId = 1;
-        Client client = new Client();
-        when(clientRepository.findById(clientId)).thenReturn(Optional.of(client));
+        Client client = new Client("Client 1");
+        when(clientRepo.findById(1)).thenReturn(Optional.of(client));
 
-        Optional<Client> result = clientService.getClientById(clientId);
-        assertTrue(result.isPresent());
-        assertEquals(client, result.get());
+        Client result = clientService.getClientById(1);
+        assertEquals("Client 1", result.getName());
+    }
+
+    @Test
+    public void testGetClientByIdNotFound() {
+        when(clientRepo.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> clientService.getClientById(1));
     }
 
     @Test
     public void testCreateClient() {
-        Client client = new Client();
-        when(clientRepository.save(client)).thenReturn(client);
+        Client newClient = new Client("New Client");
+        when(clientRepo.save(newClient)).thenReturn(newClient);
 
-        Client createdClient = clientService.createClient(client);
-        assertEquals(client, createdClient);
+        Client result = clientService.createClient(newClient);
+        assertEquals("New Client", result.getName());
     }
 
     @Test
     public void testUpdateClient() {
-        int clientId = 1;
-        Client updatedClient = new Client();
-        when(clientRepository.existsById(clientId)).thenReturn(true);
-        when(clientRepository.save(updatedClient)).thenReturn(updatedClient);
+        Client existingClient = new Client("Client 1");
+        when(clientRepo.findById(2)).thenReturn(Optional.of(existingClient));
+        when(clientRepo.save(existingClient)).thenReturn(existingClient);
 
-        Client result = clientService.updateClient(clientId, updatedClient);
-        assertEquals(updatedClient, result);
+        Client updatedClient = new Client("Updated Client");
+        Client result = clientService.updateClient(2, updatedClient);
+
+        assertEquals("Updated Client", result.getName());
+    }
+
+    @Test
+    public void testUpdateClientNotFound() {
+        when(clientRepo.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> clientService.updateClient(1, new Client("Updated Client")));
     }
 
     @Test
     public void testDeleteClient() {
-        int clientId = 1;
-
-        // No need to mock for delete since we are not returning anything
-
-        assertDoesNotThrow(() -> clientService.deleteClient(clientId));
+        clientService.deleteClient(1);
+        Mockito.verify(clientRepo, Mockito.times(1)).deleteById(1);
     }
 }

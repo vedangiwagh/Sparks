@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "6a354483-be6b-40ba-a150-5aa223bb0e17",
+		"name": "meals-ingredient-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30575352"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/v1/ingredients/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/ingredients/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"ingredients",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/v1/ingredients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/ingredients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"ingredients"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
