@@ -16,32 +16,32 @@ import java.util.Set;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RecipeID")
+    @Column(name = "recipeid")
     private Integer recipeId; // Unique identifier for the recipe
 
     @ManyToOne
-    @JoinColumn(name = "ClientID")
+    @JoinColumn(name = "clientid")
     private Client client; // Client associated with the recipe
 
-    @Column(name = "RecipeName")
+    @Column(name = "recipename")
     private String recipeName; // Name of the recipe
 
-    @Column(name = "Description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description; // Recipe description
 
-    @Column(name = "Instructions", columnDefinition = "TEXT")
+    @Column(name = "instructions", columnDefinition = "TEXT")
     private String instructions; // Cooking instructions
 
-    @Column(name = "PreparationTime")
+    @Column(name = "preparationtime")
     private Integer preparationTime; // Preparation time in minutes
 
-    @Column(name = "CookingTime")
+    @Column(name = "cookingtime")
     private Integer cookingTime; // Cooking time in minutes
 
-    @Column
+    @Column(name = "mealtype")
     private String mealType;
 
-    @Column
+    @Column(name = "recipetype")
     private String recipeType;
 
     // Constructors, getters, and setters
