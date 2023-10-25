@@ -16,7 +16,7 @@ public class RecipeTests {
         // Create a sample recipe for testing
         Client client = new Client();
         recipe = new Recipe(client, "Sample Recipe", "Sample Description",
-                "Sample Instructions", 30, 60);
+                "Sample Instructions", 30, 60, "Breakfast", "Gluten-free");
     }
 
     @Test
