@@ -16,40 +16,48 @@ import java.util.Set;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RecipeID")
+    @Column(name = "recipeid")
     private Integer recipeId; // Unique identifier for the recipe
 
     @ManyToOne
-    @JoinColumn(name = "ClientID")
+    @JoinColumn(name = "clientid")
     private Client client; // Client associated with the recipe
 
-    @Column(name = "RecipeName")
+    @Column(name = "recipename")
     private String recipeName; // Name of the recipe
 
-    @Column(name = "Description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description; // Recipe description
 
-    @Column(name = "Instructions", columnDefinition = "TEXT")
+    @Column(name = "instructions", columnDefinition = "TEXT")
     private String instructions; // Cooking instructions
 
-    @Column(name = "PreparationTime")
+    @Column(name = "preparationtime")
     private Integer preparationTime; // Preparation time in minutes
 
-    @Column(name = "CookingTime")
+    @Column(name = "cookingtime")
     private Integer cookingTime; // Cooking time in minutes
+
+    @Column(name = "mealtype")
+    private String mealType;
+
+    @Column(name = "recipetype")
+    private String recipeType;
 
     // Constructors, getters, and setters
 
     public Recipe() {
     }
 
-    public Recipe(Client client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime) {
+    public Recipe(Client client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime, String mealType, String recipeType) {
         this.client = client;
         this.recipeName = recipeName;
         this.description = description;
         this.instructions = instructions;
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
+        this.mealType = mealType;
+        this.recipeType = recipeType;
     }
 
     public Integer getRecipeId() {
@@ -108,6 +116,22 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
+    public String getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
+    }
+
+    public String getRecipeType() {
+        return recipeType;
+    }
+
+    public void setRecipeType(String recipeType) {
+        this.recipeType = recipeType;
+    }
+
     public void setRecipe(Recipe otherRecipe) {
         this.client = otherRecipe.getClient();
         this.recipeName = otherRecipe.getRecipeName();
@@ -115,6 +139,8 @@ public class Recipe {
         this.instructions = otherRecipe.getInstructions();
         this.preparationTime = otherRecipe.getPreparationTime();
         this.cookingTime = otherRecipe.getCookingTime();
+        this.recipeType = otherRecipe.getRecipeType();
+        this.mealType = otherRecipe.getMealType();
     }
 
 

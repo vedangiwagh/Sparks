@@ -25,6 +25,12 @@ public class RecipeController {
         return recipeService.getRecipeById(recipeId);
     }
 
+    // Define an endpoint to retrieve a recipe by its name.
+    @GetMapping("/byName/{name}")
+    public List<Recipe> getRecipeByName(@PathVariable String name) {
+        return recipeService.findRecipesByName(name);
+    }
+
     // Define an endpoint to retrieve all recipes.
     @GetMapping
     public List<Recipe> getAllRecipes() {

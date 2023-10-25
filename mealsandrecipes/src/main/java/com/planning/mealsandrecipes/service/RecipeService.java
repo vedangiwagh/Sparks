@@ -50,6 +50,10 @@ public class RecipeService {
         return updatedRecipe;
     }
 
+    public List<Recipe> findRecipesByName(String recipeName) {
+        System.out.println("RECIPE NAME" + recipeName);
+        return recipeRepository.findByRecipeName(recipeName);
+    }
     // Delete a recipe by its ID.
     public void deleteRecipe(Integer recipeId) {
         recipeRepository.deleteById(Long.valueOf(recipeId));
