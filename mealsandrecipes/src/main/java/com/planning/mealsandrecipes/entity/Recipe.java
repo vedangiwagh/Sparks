@@ -38,18 +38,26 @@ public class Recipe {
     @Column(name = "CookingTime")
     private Integer cookingTime; // Cooking time in minutes
 
+    @Column
+    private String mealType;
+
+    @Column
+    private String recipeType;
+
     // Constructors, getters, and setters
 
     public Recipe() {
     }
 
-    public Recipe(Client client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime) {
+    public Recipe(Client client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime, String mealType, String recipeType) {
         this.client = client;
         this.recipeName = recipeName;
         this.description = description;
         this.instructions = instructions;
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
+        this.mealType = mealType;
+        this.recipeType = recipeType;
     }
 
     public Integer getRecipeId() {
@@ -108,6 +116,22 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
+    public String getMealType() {
+        return mealType;
+    }
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
+    }
+
+    public String getRecipeType() {
+        return recipeType;
+    }
+
+    public void setRecipeType(String recipeType) {
+        this.recipeType = recipeType;
+    }
+
     public void setRecipe(Recipe otherRecipe) {
         this.client = otherRecipe.getClient();
         this.recipeName = otherRecipe.getRecipeName();
@@ -115,6 +139,8 @@ public class Recipe {
         this.instructions = otherRecipe.getInstructions();
         this.preparationTime = otherRecipe.getPreparationTime();
         this.cookingTime = otherRecipe.getCookingTime();
+        this.recipeType = otherRecipe.getRecipeType();
+        this.mealType = otherRecipe.getMealType();
     }
 
 
