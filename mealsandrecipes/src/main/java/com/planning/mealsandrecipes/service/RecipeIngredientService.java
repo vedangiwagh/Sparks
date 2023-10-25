@@ -6,6 +6,7 @@ import com.planning.mealsandrecipes.repository.RecipeIngredientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,6 +20,11 @@ public class RecipeIngredientService {
 
     public RecipeIngredient save(RecipeIngredient recipeIngredient) {
         return recipeIngredientRepository.save(recipeIngredient);
+    }
+
+    public List<RecipeIngredient> getById(Integer id){
+        return recipeIngredientRepository.findAllById(Collections.singleton(id));
+
     }
 
     public List<RecipeIngredient> getAll() {
