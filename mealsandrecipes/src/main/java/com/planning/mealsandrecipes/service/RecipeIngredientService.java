@@ -1,12 +1,10 @@
 package com.planning.mealsandrecipes.service;
 
-import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.entity.RecipeIngredient;
 import com.planning.mealsandrecipes.repository.RecipeIngredientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,9 +20,9 @@ public class RecipeIngredientService {
         return recipeIngredientRepository.save(recipeIngredient);
     }
 
-    public List<RecipeIngredient> getById(Integer id){
-        return recipeIngredientRepository.findAllById(Collections.singleton(id));
-
+    public List<RecipeIngredient> findRecipesById(Integer recipe_id) {
+        System.out.println("RECIPE id " + recipe_id);
+        return recipeIngredientRepository.findByRecipeId(recipe_id);
     }
 
     public List<RecipeIngredient> getAll() {
@@ -34,6 +32,5 @@ public class RecipeIngredientService {
     public List<RecipeIngredient> saveAll(List<RecipeIngredient> recipeIngredientsList) {
         return recipeIngredientRepository.saveAll(recipeIngredientsList);
     }
-    // Implement service methods for managing recipe ingredients here
-    // For example, save, findById, findAll, update, delete, etc.
+
 }

@@ -34,7 +34,7 @@ public class RecipeIngredientController {
     @GetMapping("/{id}")
     public List<RecipeIngredient> getAllRecipeIngredientsByRecipeId(@PathVariable Integer id) {
         // Implement logic to retrieve all recipe ingredients
-        return recipeIngredientService.getById(id);
+        return recipeIngredientService.findRecipesById(id);
     }
     @PostMapping("/bulk")
     public List<RecipeIngredient> createRecipeIngredients(@RequestBody List<RecipeIngredient> recipeIngredients) {
