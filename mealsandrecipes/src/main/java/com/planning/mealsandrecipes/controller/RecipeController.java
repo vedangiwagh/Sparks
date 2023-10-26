@@ -1,12 +1,16 @@
 package com.planning.mealsandrecipes.controller;
 
+import com.planning.mealsandrecipes.MealModel;
+import com.planning.mealsandrecipes.NutritionModel;
 import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.service.MealPlanService;
 import com.planning.mealsandrecipes.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +18,8 @@ import java.util.List;
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
+    @Autowired
+    private MealPlanService mealPlanService;
 
     // Define an endpoint to create a new recipe.
 
@@ -59,6 +65,20 @@ public class RecipeController {
         // Check if the existing recipe with the given ID exists.
         return recipeService.updateRecipe(recipeId, recipe);
 
+    }
+
+    @Operation(summary = "Returns a specific Recipe based nutrition on recipe id.")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of nutrition of Recipes")
+    @ApiResponse(responseCode = "404", description = "no Recipes")
+    @GetMapping("/nutrition/{recipeId}")
+    public NutritionModel getNutritionRecipe(@PathVariable Integer recipeId) {
+
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        List<Recipe> recipeList = new ArrayList<>();
+        recipeList.add(recipe);
+        List<MealModel> mealModels = mealPlanService.findIngredients(recipeList);
+
+        return mealModels.get(0).getNutritionModel();
     }
 
     // Define an endpoint to delete a recipe by its ID.
