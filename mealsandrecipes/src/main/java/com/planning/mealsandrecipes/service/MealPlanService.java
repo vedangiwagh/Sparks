@@ -62,34 +62,33 @@ public class MealPlanService {
             mealModel.setRecipe(r);
             List<RecipeIngredient> recipeIngredients = recipeIngredientRepo.findByRecipeId(r.getRecipeId());
             List<String>  ingredientsList = new ArrayList<>();
-            for (RecipeIngredient ri : recipeIngredients)
+            for (RecipeIngredient recipeIngredient : recipeIngredients)
             {
-                String s = ri.getQuantity();
-                ingredientsList.add(s);
+                String recipeIngredientQuantity = recipeIngredient.getQuantity(); //getting the recipe ingredients
+                ingredientsList.add(recipeIngredientQuantity);
 
-                String pattern2 = "^(\\d+)";
-
-                Pattern reg2 = Pattern.compile(pattern2);
-
-                Matcher m2 = reg2.matcher(s);
+                //regex pattern to detect number
+                String pattern = "^(\\d+)";
+                Pattern reg = Pattern.compile(pattern);
+                Matcher m = reg.matcher(recipeIngredientQuantity);//match the regex
                 Float quant = 0.0F;
-                if(m2.find())
+                if(m.find()) //if pattern found
                 {
-                    String extractedText = m2.group();
-
+                    String extractedText = m.group();
                     System.out.println(extractedText);
                     float num = Float.parseFloat(extractedText);
                     if(num>10){
-                        quant=num/100;
+                        quant=num/100; // for quantity in gram calculation
                     }
                     else{
-                        quant=num;
+                        quant=num; // for whole quantity calcuation
                     }
                 }
 
-                Ingredient ingredient = ingredientRepo.findById(ri.getIngredient_id()).orElse(null);
+                Ingredient ingredient = ingredientRepo.findById(recipeIngredient.getIngredient_id()).orElse(null);
                 assert ingredient != null;
                 if(nutritionModel.getCalories()!=null) {
+                    //if the nutritiommodel object already exist
                     nutritionModel.setCalories(nutritionModel.getCalories() + quant * ingredient.getCalories());
                     nutritionModel.setFat(nutritionModel.getFat() + quant * ingredient.getFat());
                     nutritionModel.setCarbohydrates(nutritionModel.getCarbohydrates() + quant * ingredient.getCarbohydrates());
