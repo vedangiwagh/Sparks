@@ -69,11 +69,30 @@ public class MealPlanService {
                     }
 
                 Ingredient ingredient = ingredientRepo.findById(ri.getIngredient_id()).orElse(null);
-
+                assert ingredient != null;
+                if(nutritionModel.getCalories()!=null) {
+                    nutritionModel.setCalories(nutritionModel.getCalories() + quant * ingredient.getCalories());
+                    nutritionModel.setFat(nutritionModel.getFat() + quant * ingredient.getFat());
+                    nutritionModel.setCarbohydrates(nutritionModel.getCarbohydrates() + quant * ingredient.getCarbohydrates());
+                    nutritionModel.setFiber(nutritionModel.getFiber() + quant * ingredient.getFiber());
+                    nutritionModel.setSugar(nutritionModel.getSugar() + quant * ingredient.getSugar());
+                    nutritionModel.setProtein(nutritionModel.getProtein() + quant * ingredient.getProtein());
+                    nutritionModel.setSodium(nutritionModel.getSodium() + quant * ingredient.getSodium());
+                }
+                else{
+                    nutritionModel.setCalories(quant * ingredient.getCalories());
+                    nutritionModel.setFat(quant * ingredient.getFat());
+                    nutritionModel.setCarbohydrates( quant * ingredient.getCarbohydrates());
+                    nutritionModel.setFiber( quant * ingredient.getFiber());
+                    nutritionModel.setSugar( quant * ingredient.getSugar());
+                    nutritionModel.setProtein(quant * ingredient.getProtein());
+                    nutritionModel.setSodium(quant * ingredient.getSodium());
+                }
 
             }
 
             mealModel.setIngredientList(ingredientsList);
+            mealModel.setNutritionModel(nutritionModel);
             mealModels.add(mealModel);
         }
 //        System.out.println("MEALPLAN---" + mealModel.getRecipe().getRecipeName() );
