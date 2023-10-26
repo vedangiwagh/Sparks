@@ -1,6 +1,9 @@
 package com.planning.mealsandrecipes.service;
 
 import com.planning.mealsandrecipes.MealModel;
+import com.planning.mealsandrecipes.NutritionModel;
+import com.planning.mealsandrecipes.entity.Client;
+import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.entity.Recipe;
 import com.planning.mealsandrecipes.entity.RecipeIngredient;
 import com.planning.mealsandrecipes.repository.IngredientRepo;
@@ -33,9 +36,26 @@ public class MealPlanService {
 
 
     public List<MealModel> getMeal(String mealType, String recipeType) {
-        List<MealModel> mealModels = new ArrayList<MealModel>();
-
         List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeType(mealType,recipeType);
+        List<MealModel> mealModels = findIngredients(recipes);
+
+        return mealModels;
+    }
+
+    public List<MealModel> getMealClientSpecific(String mealType, String recipeType, int clientId, String clientName) {
+
+        Client client = new Client();
+        client.setName(clientName);
+        client.setClientID(clientId);
+
+        List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, client);
+        List<MealModel> mealModels = findIngredients(recipes);
+
+        return mealModels;
+    }
+
+    public List<MealModel> findIngredients(List<Recipe> recipes){
+        List<MealModel> mealModels = new ArrayList<MealModel>();
         for(Recipe r : recipes){
             MealModel mealModel = new MealModel();
             NutritionModel nutritionModel = new NutritionModel();
@@ -53,19 +73,19 @@ public class MealPlanService {
 
                 Matcher m2 = reg2.matcher(s);
                 Float quant = 0.0F;
-                    if(m2.find())
-                    {
-                        String extractedText = m2.group();
+                if(m2.find())
+                {
+                    String extractedText = m2.group();
 
-                        System.out.println(extractedText);
-                        float num = Float.parseFloat(extractedText);
-                        if(num>10){
-                            quant=num/100;
-                        }
-                        else{
-                            quant=num;
-                        }
+                    System.out.println(extractedText);
+                    float num = Float.parseFloat(extractedText);
+                    if(num>10){
+                        quant=num/100;
                     }
+                    else{
+                        quant=num;
+                    }
+                }
 
                 Ingredient ingredient = ingredientRepo.findById(ri.getIngredient_id()).orElse(null);
 
@@ -75,25 +95,8 @@ public class MealPlanService {
             mealModel.setIngredientList(ingredientsList);
             mealModels.add(mealModel);
         }
-//        System.out.println("MEALPLAN---" + mealModel.getRecipe().getRecipeName() );
 
         return mealModels;
     }
 
-    public List<MealModel> getMealClientSpecific(String mealType, String recipeType, int clientId, String clientName) {
-        List<MealModel> mealModels = new ArrayList<MealModel>();
-        Client client = new Client();
-        client.setName(clientName);
-        client.setClientID(clientId);
-
-        List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, client);
-        for(Recipe r : recipes){
-            MealModel mealModel = new MealModel();
-            mealModel.setRecipe(r);
-            mealModels.add(mealModel);
-        }
-//        System.out.println("MEALPLAN---" + mealModel.getRecipe().getRecipeName() );
-
-        return mealModels;
-    }
 }
