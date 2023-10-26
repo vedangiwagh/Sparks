@@ -10,8 +10,9 @@ public class MealModel{
     }
 
     Recipe recipe;
-    List<Ingredient> ingredientList;
+    List<String> ingredientList;
     float nutrionalValue;
+    NutritionModel nutritionModel;
 
     public Recipe getRecipe() {
         return recipe;
@@ -21,11 +22,11 @@ public class MealModel{
         this.recipe = recipe;
     }
 
-    public List<Ingredient> getIngredientList() {
+    public List<String> getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(List<Ingredient> ingredientList) {
+    public void setIngredientList(List<String> ingredientList) {
         this.ingredientList = ingredientList;
     }
 
@@ -35,5 +36,13 @@ public class MealModel{
 
     public void setNutrionalValue(float nutrionalValue) {
         this.nutrionalValue = nutrionalValue;
+    }
+
+    public NutritionModel getNutritionModel() {
+        return nutritionModel;
+    }
+
+    public void setNutritionModel(NutritionModel nutritionModel) {
+        this.nutritionModel = nutritionModel;
     }
 }
