@@ -7,19 +7,17 @@
 	},
 	"item": [
 		{
-			"name": "localhost:8080/api/v1/ingredients/{id}",
+			"name": "localhost:8080/ingredients/{id}",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/v1/ingredients/1",
+					"raw": "localhost:8080/ingredients/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
-						"v1",
 						"ingredients",
 						"1"
 					]
@@ -28,19 +26,17 @@
 			"response": []
 		},
 		{
-			"name": "localhost:8080/api/v1/ingredients",
+			"name": "localhost:8080/ingredients",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/v1/ingredients",
+					"raw": "localhost:8080/ingredients",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
-						"v1",
 						"ingredients"
 					]
 				}

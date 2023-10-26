@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "8a62d1f0-ee01-4a13-be1f-6b1d085d1751",
+		"name": "meals-Plan-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30575352"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/meals/{mealType}/{recipeType}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/meals/Main Course              /Vegetarian               ",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meals",
+						"Main Course              ",
+						"Vegetarian               "
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/meals/{mealType}/{recipeType}/{clientId}/{clientName}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/meals/Main Course              /Vegetarian               /2/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meals",
+						"Main Course              ",
+						"Vegetarian               ",
+						"2",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
