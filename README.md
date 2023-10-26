@@ -71,7 +71,7 @@ spring.datasource.password=<PASSWORD>
 
 server.error.include-message=always
 ```
-```
+
 #### Create a executable JAR file in terminal
 ```bash
 mvn clean install
@@ -82,7 +82,7 @@ mvn spring-boot:run
 ```
 #### Test the application in terminal
 ```bash
-/mvnw test
+./mvnw test
 ```
 
 ## Table of Contents
