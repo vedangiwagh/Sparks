@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/recipe-ingredients")
+@RequestMapping("/recipe-ingredients")
 public class RecipeIngredientController {
     private final RecipeIngredientService recipeIngredientService;
 
@@ -31,8 +31,15 @@ public class RecipeIngredientController {
         return recipeIngredientService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public List<RecipeIngredient> getAllRecipeIngredientsByRecipeId(@PathVariable Integer id) {
+        // Implement logic to retrieve all recipe ingredients
+        return recipeIngredientService.findRecipesById(id);
+    }
     @PostMapping("/bulk")
     public List<RecipeIngredient> createRecipeIngredients(@RequestBody List<RecipeIngredient> recipeIngredients) {
         return recipeIngredientService.saveAll(recipeIngredients);
     }
+
+    //delete
 }
