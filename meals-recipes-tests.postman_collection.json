@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "9ba17f74-be08-4e9d-96b8-82e050813f9d",
+		"name": "meals-recipes-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30575352"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/recipes/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/recipes/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/recipes/byName/{name}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/recipes/byName/Broccoli Soup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipes",
+						"byName",
+						"Broccoli Soup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/recipes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/recipe-ingredients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/recipe-ingredients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipe-ingredients"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
