@@ -5,6 +5,7 @@ import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,31 +29,41 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     // Define an endpoint to get a specific ingredient by its ID.
-    @GetMapping(value = "/{id}")
     @Operation(summary = "Returns a specific ingredient based on given parameter.")
-    public Ingredient getIngredient(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable Long id) {
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of ingredients")
+    @ApiResponse(responseCode = "404", description = "no ingredients")
+    @GetMapping(value = "/{id}")
+   public Ingredient getIngredient(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable Long id) {
         return ingredientService.getById(id);
     }
 
     // Define an endpoint to get a list of all ingredients in the database.
-    @GetMapping()
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of ingredients")
+    @ApiResponse(responseCode = "404", description = "Ingredient not exist with id")
     @Operation(summary = "Returns a list of all ingredients in the database.")
+    @GetMapping()
     public List<Ingredient> getAllIngredients() {
         return ingredientService.getAll();
     }
 
 
     @PostMapping
+    @Operation(summary = "Create a new ingredient")
+    @ApiResponse(responseCode = "201", description = "ingredient created successfully")
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
         return ingredientService.save(ingredient);
     }
 
     @PostMapping("/bulk")
+    @Operation(summary = "Create a new ingredients in bulk")
+    @ApiResponse(responseCode = "201", description = "ingredients created successfully")
     public List<Ingredient> createIngredients(@RequestBody List<Ingredient> ingredients) {
         return ingredientService.saveAll(ingredients);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete ingredient")
+    @ApiResponse(responseCode = "200", description = "ingredient deleted successfully")
     public void deleteIngredient(@PathVariable Long id) {
         ingredientService.delete(id);
     }
