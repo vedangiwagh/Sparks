@@ -80,6 +80,10 @@ mvn clean install
 ```bash
 mvn spring-boot:run
 ```
+#### Run the Style Checker in terminal
+```bash
+./mvnw checkstyle:check
+```
 #### Test the application in terminal
 ```bash
 ./mvnw test
@@ -197,6 +201,9 @@ To run the application, follow these steps:
 4. Run the application using Maven: `mvn spring-boot:run`.
 
 ## API Endpoints
+
+Swagger UI:
+http://localhost:8080/swagger-ui/index.html
 
 ## Error Handling
 
