@@ -18,6 +18,12 @@ public class MealPlanController {
         return mealPlanService.getMeal(mealType, recipeType);
     }
 
+    @GetMapping("/{mealType}/{recipeType}/{clientId}/{clientName}")
+    public List<MealModel> getMealClientSpecific(@PathVariable String mealType, @PathVariable String recipeType,
+                                   @PathVariable int clientId, @PathVariable String clientName) {
+        return mealPlanService.getMealClientSpecific(mealType, recipeType, clientId, clientName);
+    }
+
 
 
 }

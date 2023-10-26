@@ -1,5 +1,6 @@
 package com.planning.mealsandrecipes.repository;
 
+import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +18,8 @@ public interface RecipeRepo extends JpaRepository<Recipe, Long> {
     List<Recipe> findByMealType(@Param("mealtype")String mealType);
 
     List<Recipe> findByMealTypeAndRecipeType(@Param("mealtype")String mealType, @Param("recipename")String recipeType);
+
+    List<Recipe> findByMealTypeAndRecipeTypeAndClient(@Param("mealtype")String mealType, @Param("recipename")String recipeType, @Param("client") Client client);
 
 
 
