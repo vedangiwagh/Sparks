@@ -193,23 +193,23 @@ The API follows standard HTTP status codes for error responses. In case of an er
 
 ### 1. Get a Specific Ingredient
 
-- **Endpoint**: `GET /api/v1/ingredients/{id}`
+- **Endpoint**: `GET /api/ingredients/{id}`
 - **Description**: Retrieve a specific ingredient by its unique identifier (ID).
-- **Example Request**: `GET /api/v1/ingredients/1`
+- **Example Request**: `GET /api/ingredients/1`
 - **Response**: Returns the ingredient with the specified ID.
 
 ### 2. Get All Ingredients
 
-- **Endpoint**: `GET /api/v1/ingredients`
+- **Endpoint**: `GET /api/ingredients`
 - **Description**: Retrieve a list of all ingredients stored in the database.
-- **Example Request**: `GET /api/v1/ingredients`
+- **Example Request**: `GET /api/ingredients`
 - **Response**: Returns a list of all ingredients.
 
 ### 3. Create a New Ingredient
 
-- **Endpoint**: `POST /api/v1/ingredients`
+- **Endpoint**: `POST /api/ingredients`
 - **Description**: Create a new ingredient by providing the necessary data in the request body.
-- **Example Request**: `POST /api/v1/ingredients`
+- **Example Request**: `POST /api/ingredients`
 - **Request Body**: Contains ingredient details.
 - **Response**: Returns the newly created ingredient.
 
@@ -223,9 +223,9 @@ The API follows standard HTTP status codes for error responses. In case of an er
 
 ### 5. Delete an Ingredient
 
-- **Endpoint**: `DELETE /api/v1/ingredients/{id}`
+- **Endpoint**: `DELETE /api/ingredients/{id}`
 - **Description**: Delete an ingredient with the specified ID from the database.
-- **Example Request**: `DELETE /api/v1/ingredients/1`
+- **Example Request**: `DELETE /api/ingredients/1`
 - **Response**: No content (204) if the ingredient is successfully deleted.
 
 ## Recipe Endpoints
@@ -239,71 +239,71 @@ The API follows standard HTTP status codes for error responses. In case of an er
 
 ### 2. Get All Recipes
 
-- **Endpoint**: `GET /api/v1/recipes`
+- **Endpoint**: `GET /api/recipes`
 - **Description**: Retrieve a list of all recipes stored in the database.
-- **Example Request**: `GET /api/v1/recipes`
+- **Example Request**: `GET /api/recipes`
 - **Response**: Returns a list of all recipes.
 
 ### 3. Create a New Recipe
 
-- **Endpoint**: `POST /api/v1/recipes`
+- **Endpoint**: `POST /api/recipes`
 - **Description**: Create a new recipe by providing the necessary data in the request body.
-- **Example Request**: `POST /api/v1/recipes`
+- **Example Request**: `POST /api/recipes`
 - **Request Body**: Contains recipe details.
 - **Response**: Returns the newly created recipe.
 
 ### 4. Update an Existing Recipe
 
-- **Endpoint**: `PUT /api/v1/recipes/{id}`
+- **Endpoint**: `PUT /api/recipes/{id}`
 - **Description**: Update an existing recipe by specifying its ID and providing updated data in the request body.
-- **Example Request**: `PUT /api/v1/recipes/1`
+- **Example Request**: `PUT /api/recipes/1`
 - **Request Body**: Contains updated recipe details.
 - **Response**: Returns the updated recipe.
 
 ### 5. Delete a Recipe
 
-- **Endpoint**: `DELETE /api/v1/recipes/{id}`
+- **Endpoint**: `DELETE /api/recipes/{id}`
 - **Description**: Delete a recipe with the specified ID from the database.
-- **Example Request**: `DELETE /api/v1/recipes/1`
+- **Example Request**: `DELETE /api/recipes/1`
 - **Response**: No content (204) if the recipe is successfully deleted.
 
 ## Client Endpoints
 
 ### 1. Get a Specific Client
 
-- **Endpoint**: `GET /api/v1/clients/{id}`
+- **Endpoint**: `GET /api/clients/{id}`
 - **Description**: Retrieve a specific client by their unique identifier (ID).
-- **Example Request**: `GET /api/v1/clients/1`
+- **Example Request**: `GET /api/clients/1`
 - **Response**: Returns the client with the specified ID.
 
 ### 2. Get All Clients
 
-- **Endpoint**: `GET /api/v1/clients`
+- **Endpoint**: `GET /api/clients`
 - **Description**: Retrieve a list of all clients stored in the database.
-- **Example Request**: `GET /api/v1/clients`
+- **Example Request**: `GET /api/clients`
 - **Response**: Returns a list of all clients.
 
 ### 3. Create a New Client
 
-- **Endpoint**: `POST /api/v1/clients`
+- **Endpoint**: `POST /api/clients`
 - **Description**: Create a new client by providing the necessary data in the request body.
-- **Example Request**: `POST /api/v1/clients`
+- **Example Request**: `POST /api/clients`
 - **Request Body**: Contains client details.
 - **Response**: Returns the newly created client.
 
 ### 4. Update an Existing Client
 
-- **Endpoint**: `PUT /api/v1/clients/{id}`
+- **Endpoint**: `PUT /api/clients/{id}`
 - **Description**: Update an existing client by specifying their ID and providing updated data in the request body.
-- **Example Request**: `PUT /api/v1/clients/1`
+- **Example Request**: `PUT /api/clients/1`
 - **Request Body**: Contains updated client details.
 - **Response**: Returns the updated client.
 
 ### 5. Delete a Client
 
-- **Endpoint**: `DELETE /api/v1/clients/{id}`
+- **Endpoint**: `DELETE /api/clients/{id}`
 - **Description**: Delete a client with the specified ID from the database.
-- **Example Request**: `DELETE /api/v1/clients/1`
+- **Example Request**: `DELETE /api/clients/1`
 - **Response**: No content (204) if the client is successfully deleted.
 
 
