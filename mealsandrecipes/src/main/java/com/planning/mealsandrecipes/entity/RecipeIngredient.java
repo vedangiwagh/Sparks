@@ -8,10 +8,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "recipe_ingredient")
 public class RecipeIngredient implements Serializable {
-    @EmbeddedId
-    private Integer recipe_id;
-    @Column
-    private Integer ingredient_id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "recipe_id")
+    private Integer recipeId;
+
+
+    @Column(name = "ingredient_id")
+    private Long ingredient_id;
     @Column(name = "Quantity")
     private String quantity;
 
@@ -27,19 +34,19 @@ public class RecipeIngredient implements Serializable {
 //        this.quantity = quantity;
 //    }
 
-    public int getRecipe_id() {
-        return recipe_id;
+    public int getRecipeId() {
+        return recipeId;
     }
 
-    public void setRecipe_id(Integer recipe_id) {
-        this.recipe_id = recipe_id;
+    public void setRecipeId(Integer recipeId) {
+        this.recipeId = recipeId;
     }
 
-    public int getIngredient_id() {
+    public Long getIngredient_id() {
         return ingredient_id;
     }
 
-    public void setIngredient_id(int ingredient_id) {
+    public void setIngredient_id(Long ingredient_id) {
         this.ingredient_id = ingredient_id;
     }
 
@@ -49,5 +56,13 @@ public class RecipeIngredient implements Serializable {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
