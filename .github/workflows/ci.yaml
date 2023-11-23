@@ -40,5 +40,7 @@ jobs:
       run: |
         cd mealsandrecipes
         ./mvnw test
-    
-      
+    - name: 🐛 Static Analysis
+      run: |
+        cd mealsandrecipes
+        mvn spotbugs:check
