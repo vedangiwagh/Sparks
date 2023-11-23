@@ -89,6 +89,11 @@ mvn spring-boot:run
 ./mvnw test
 ```
 
+#### Run Static Code analysis on project
+```bash
+./mvnw spotbugs:check
+```
+
 ## Table of Contents
 
 - [Project Structure](#project-structure)
