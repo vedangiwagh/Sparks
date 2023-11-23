@@ -14,6 +14,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./scripts
+
 jobs:
   build:
 
@@ -34,4 +39,4 @@ jobs:
     - name: List all files
       run: ls -al
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn clean install --file mealsandrecipes/pom.xml
