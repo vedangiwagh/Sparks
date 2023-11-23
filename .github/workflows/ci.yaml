@@ -28,11 +28,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: List all files
+    - name: 👀 List all files
       run: ls
-    - name: CD into proj dir
-      run: cd mealsandrecipes
-    - name: List all files
-      run: ls -al
-    - name: Build Sparks Meal&Receipes
+    - name: 🛠️ Build Sparks Meal&Receipes
       run: mvn clean install --file mealsandrecipes/pom.xml
