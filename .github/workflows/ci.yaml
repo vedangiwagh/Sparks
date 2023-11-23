@@ -34,5 +34,5 @@ jobs:
       run: cd mealsandrecipes
     - name: List all files
       run: ls -al
-    - name: Build with Maven
+    - name: Build Sparks Meal&Receipes
       run: mvn clean install --file mealsandrecipes/pom.xml
