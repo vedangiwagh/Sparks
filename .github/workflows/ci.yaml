@@ -36,5 +36,9 @@ jobs:
       run: |
         cd mealsandrecipes
         ./mvnw checkstyle:check
+    - name: 🚀 Run Unit Tests
+      run: |
+        cd mealsandrecipes
+        ./mvnw test
     
       
