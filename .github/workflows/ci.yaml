@@ -32,3 +32,9 @@ jobs:
       run: ls
     - name: 🛠️ Build Sparks Meal&Receipes
       run: mvn clean install --file mealsandrecipes/pom.xml
+    - name: 💅 Style Checker
+      run: |
+        cd mealsandrecipes
+        ./mvnw checkstyle:check
+    
+      
