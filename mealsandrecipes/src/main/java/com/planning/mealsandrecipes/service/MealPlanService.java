@@ -1,6 +1,6 @@
 package com.planning.mealsandrecipes.service;
 
-import com.planning.mealsandrecipes.MealModel;
+import com.planning.mealsandrecipes.model.MealModel;
 import com.planning.mealsandrecipes.NutritionModel;
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Ingredient;
@@ -12,9 +12,7 @@ import com.planning.mealsandrecipes.repository.RecipeRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

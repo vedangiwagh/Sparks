@@ -1,5 +1,6 @@
-package com.planning.mealsandrecipes;
+package com.planning.mealsandrecipes.model;
 
+import com.planning.mealsandrecipes.NutritionModel;
 import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.entity.Recipe;
 
