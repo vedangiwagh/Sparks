@@ -19,10 +19,6 @@ public class Recipe {
     @Column(name = "recipeid")
     private Integer recipeId; // Unique identifier for the recipe
 
-    @ManyToOne
-    @JoinColumn(name = "clientid")
-    private Client client; // Client associated with the recipe
-
     @Column(name = "recipename")
     private String recipeName; // Name of the recipe
 
@@ -44,12 +40,15 @@ public class Recipe {
     @Column(name = "recipetype")
     private String recipeType;
 
+    @Column(name = "clientid")
+    private int client; // Client associated with the recipe
+
     // Constructors, getters, and setters
 
     public Recipe() {
     }
 
-    public Recipe(Client client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime, String mealType, String recipeType) {
+    public Recipe(int client, String recipeName, String description, String instructions, Integer preparationTime, Integer cookingTime, String mealType, String recipeType) {
         this.client = client;
         this.recipeName = recipeName;
         this.description = description;
@@ -60,6 +59,9 @@ public class Recipe {
         this.recipeType = recipeType;
     }
 
+    public Recipe(Client client, String sampleRecipe, String sampleDescription, String sampleInstructions, int preparationTime, int cookingTime, String breakfast, String recipeType) {
+    }
+
     public Integer getRecipeId() {
         return recipeId;
     }
@@ -68,11 +70,11 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
-    public Client getClient() {
+    public int getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(int client) {
         this.client = client;
     }
 
@@ -143,20 +145,4 @@ public class Recipe {
         this.mealType = otherRecipe.getMealType();
     }
 
-
-
-    // Override the equals method to compare recipes by their ID.
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe = (Recipe) o;
-        return recipeId.equals(recipe.recipeId);
-    }
-
-    // Override the hashCode method to compute the hash code based on the recipe's ID.
-    @Override
-    public int hashCode() {
-        return Objects.hash(recipeId);
-    }
 }

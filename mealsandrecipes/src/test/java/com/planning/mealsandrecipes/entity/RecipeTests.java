@@ -2,10 +2,16 @@ package com.planning.mealsandrecipes.entity;
 
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.repository.RecipeRepo;
+import com.planning.mealsandrecipes.service.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class RecipeTests {
 
@@ -15,7 +21,7 @@ public class RecipeTests {
     public void setUp() {
         // Create a sample recipe for testing
         Client client = new Client();
-        recipe = new Recipe(client, "Sample Recipe", "Sample Description",
+        recipe = new Recipe(0, "Sample Recipe", "Sample Description",
                 "Sample Instructions", 30, 60, "Breakfast", "Gluten-free");
     }
 
