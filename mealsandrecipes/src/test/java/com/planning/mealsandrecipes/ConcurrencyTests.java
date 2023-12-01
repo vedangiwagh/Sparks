@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -231,7 +232,7 @@ public class ConcurrencyTests {
         int numberOfThreads = 7;
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
-        List<Callable<List<MealModel>>> tasks = new ArrayList<>();
+        List<Callable<Map.Entry<MealRequest, List<MealModel>>>> tasks = new ArrayList<>();
 
         for (int i = 2; i < numberOfThreads; i++) {
             MealRequest mealRequest = new MealRequest();
@@ -249,20 +250,21 @@ public class ConcurrencyTests {
                         new ParameterizedTypeReference<List<MealModel>>() {}
                 );
 
-                return responseEntity.getBody();
+//                return responseEntity.getBody();
+                return Map.entry(mealRequest, responseEntity.getBody());
             });
         }
 
-        List<Future<List<MealModel>>> futures = executorService.invokeAll(tasks);
+        List<Future<Map.Entry<MealRequest, List<MealModel>>>> futures = executorService.invokeAll(tasks);
 
-        for (Future<List<MealModel>> future : futures) {
-            // Add assertions or validations on the response
-            List<MealModel> response = future.get();
-            // Add additional assertions based on the expected behavior of the endpoint
-            for (MealModel mealModel : response) {
+        for (Future<Map.Entry<MealRequest, List<MealModel>>> future : futures) {
+            Map.Entry<MealRequest, List<MealModel>> entry = future.get();
+            assertNotNull(entry.getValue());
+            for (MealModel mealModel : entry.getValue()) {
                 System.out.println(mealModel.getRecipe().getClient());
+                //check request response client
+                assertEquals(mealModel.getRecipe().getClient(), entry.getKey().getClientId());
             }
-            assertNotNull(response);
         }
 
         executorService.shutdown();
