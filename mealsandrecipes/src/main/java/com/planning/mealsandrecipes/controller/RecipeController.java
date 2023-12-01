@@ -3,6 +3,7 @@ package com.planning.mealsandrecipes.controller;
 import com.planning.mealsandrecipes.model.MealModel;
 import com.planning.mealsandrecipes.NutritionModel;
 import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.model.RecipeRequest;
 import com.planning.mealsandrecipes.service.MealPlanService;
 import com.planning.mealsandrecipes.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,6 +58,18 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
+    @Operation(summary = "Returns Recipes specific to params")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of Recipes")
+    @ApiResponse(responseCode = "404", description = "no Recipes")
+    @PostMapping("/getRecipesForClient")
+    public List<Recipe> getRecipeForClient(@RequestBody RecipeRequest request) {
+        String mealType = request.getMealType();
+        String recipeType = request.getRecipeType();
+        int client = request.getClient();
+
+        return recipeService.findRecipesforClient(mealType, recipeType, client);
+
+    }
     // Define an endpoint to update an existing recipe.
     @PutMapping("/{recipeId}")
     @Operation(summary = "Create a new recipe")
