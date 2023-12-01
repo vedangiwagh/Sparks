@@ -348,3 +348,7 @@ List the main dependencies and technologies used in your project:
 - Postman: For API testing.
 - Apache Maven Checkstyle Plugin: style checking
 
+
+## End-to-End testing Documentation
+https://docs.google.com/document/d/1XP8hMc3wFTQcRSuYYUS_jKfdM-DQZ3kqjdu3czaU2jI/edit?usp=sharing
+
