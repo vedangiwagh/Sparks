@@ -1,11 +1,3 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: SparksCI
 
 on:
@@ -14,10 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -44,4 +34,16 @@ jobs:
       run: |
         cd mealsandrecipes
         mvn spotbugs:check
-      continue-on-error: true # we should disable this once we fix the spotbug warnings
+      continue-on-error: true # We should disable this once we fix the spotbug warnings
+
+    - name: 📊 Code Coverage
+      run: |
+        cd mealsandrecipes
+        ./mvnw jacoco:prepare-agent test jacoco:report
+      continue-on-error: true # Continue even if generating reports fails
+
+    - name: 📝 Upload Code Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: mealsandrecipes/target/site/jacoco/index.html
