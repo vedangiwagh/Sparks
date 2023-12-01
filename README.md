@@ -51,8 +51,6 @@ We use the following tools and technologies for our project:
 - Test Runner for API Testing: Postman
 - Static Analysis Bug Finder: SonarQube
 
-## Code Coverage
-
 ## Steps to run the Service 🎉 
 #### Clone the project
 ```bash
@@ -346,6 +344,3 @@ List the main dependencies and technologies used in your project:
 - Postman: For API testing.
 - Apache Maven Checkstyle Plugin: style checking
 
-
-
-[def]: file:///Users/jyotsnapenumaka/Downloads/Sparks/mealsandrecipes/Code-Coverage/code_coverage.png
