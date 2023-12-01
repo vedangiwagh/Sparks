@@ -49,7 +49,7 @@ We use the following tools and technologies for our project:
 - Style Checker: GitHub Actions, IntelliJ style checker
 - Test Runner for Unit Testing: JUnit
 - Test Runner for API Testing: Postman
-- Static Analysis Bug Finder: SonarQube
+- Static Analysis Bug Finder: Bug Finder
 
 ## Code Coverage
 
