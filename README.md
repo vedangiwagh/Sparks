@@ -51,6 +51,10 @@ We use the following tools and technologies for our project:
 - Test Runner for API Testing: Postman
 - Static Analysis Bug Finder: SonarQube
 
+## Code Coverage
+
+![Code Coverage](https://github.com/vedangiwagh/Sparks/raw/main/mealsandrecipes/Code-Coverage/code_coverage.png)
+
 ## Steps to run the Service 🎉 
 #### Clone the project
 ```bash
