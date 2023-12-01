@@ -54,6 +54,10 @@ public class RecipeService {
         System.out.println("RECIPE NAME" + recipeName);
         return recipeRepository.findByRecipeName(recipeName);
     }
+
+    public List<Recipe> findRecipesforClient(String mealType, String recipeType, int client) {
+        return recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType, recipeType, client);
+    }
     // Delete a recipe by its ID.
     public void deleteRecipe(Integer recipeId) {
         recipeRepository.deleteById(Long.valueOf(recipeId));
