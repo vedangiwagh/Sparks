@@ -49,8 +49,6 @@ jobs:
         path: mealsandrecipes/target/site/jacoco/index.html
 
     - name: 📥 Download Code Coverage Report Artifact
-      run: |
-        cd mealsandrecipes
       uses: actions/download-artifact@v2
       with:
         name: code-coverage-report
