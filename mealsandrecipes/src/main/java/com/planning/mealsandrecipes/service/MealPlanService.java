@@ -46,7 +46,7 @@ public class MealPlanService {
         client.setName(clientName);
         client.setClientID(clientId);
 
-        List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, client);
+        List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, clientId);
         List<MealModel> mealModels = findIngredients(recipes);
 
         return mealModels;

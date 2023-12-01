@@ -19,7 +19,7 @@ public interface RecipeRepo extends JpaRepository<Recipe, Long> {
 
     List<Recipe> findByMealTypeAndRecipeType(@Param("mealtype")String mealType, @Param("recipename")String recipeType);
 
-    List<Recipe> findByMealTypeAndRecipeTypeAndClient(@Param("mealtype")String mealType, @Param("recipename")String recipeType, @Param("client") Client client);
+    List<Recipe> findByMealTypeAndRecipeTypeAndClient(@Param("mealtype")String mealType, @Param("recipename")String recipeType, @Param("client") int client);
 
 
 

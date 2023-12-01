@@ -3,10 +3,15 @@ package com.planning.mealsandrecipes;
 import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Recipe;
 import com.planning.mealsandrecipes.entity.RecipeIngredient;
+import com.planning.mealsandrecipes.model.MealModel;
+import com.planning.mealsandrecipes.model.MealRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -220,4 +225,47 @@ public class ConcurrencyTests {
         recipeIngredient.setRecipeId(0);
         return recipeIngredient;
     }
+
+    @Test
+    public void testConcurrentGetMealClientSpecificRequests() throws InterruptedException, ExecutionException {
+        int numberOfThreads = 7;
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+
+        List<Callable<List<MealModel>>> tasks = new ArrayList<>();
+
+        for (int i = 2; i < numberOfThreads; i++) {
+            MealRequest mealRequest = new MealRequest();
+            mealRequest.setMealType("Main Course");
+            mealRequest.setRecipeType("Vegetarian");
+            mealRequest.setClientId(i); // Assuming clientId can be different for each thread
+            mealRequest.setClientName("test");
+
+            tasks.add(() -> {
+                // Use exchange method to handle generic types
+                ResponseEntity<List<MealModel>> responseEntity = restTemplate.exchange(
+                        "http://localhost:" + port + "/meals/getMealClientSpecific",
+                        HttpMethod.POST,
+                        new HttpEntity<>(mealRequest),
+                        new ParameterizedTypeReference<List<MealModel>>() {}
+                );
+
+                return responseEntity.getBody();
+            });
+        }
+
+        List<Future<List<MealModel>>> futures = executorService.invokeAll(tasks);
+
+        for (Future<List<MealModel>> future : futures) {
+            // Add assertions or validations on the response
+            List<MealModel> response = future.get();
+            // Add additional assertions based on the expected behavior of the endpoint
+            for (MealModel mealModel : response) {
+                System.out.println(mealModel.getRecipe().getClient());
+            }
+            assertNotNull(response);
+        }
+
+        executorService.shutdown();
+    }
+
 }
