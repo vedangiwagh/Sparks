@@ -5,6 +5,7 @@ import com.planning.mealsandrecipes.entity.Recipe;
 import com.planning.mealsandrecipes.entity.RecipeIngredient;
 import com.planning.mealsandrecipes.model.MealModel;
 import com.planning.mealsandrecipes.model.MealRequest;
+import com.planning.mealsandrecipes.model.RecipeRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -242,7 +243,6 @@ public class ConcurrencyTests {
             mealRequest.setClientName("test");
 
             tasks.add(() -> {
-                // Use exchange method to handle generic types
                 ResponseEntity<List<MealModel>> responseEntity = restTemplate.exchange(
                         "http://localhost:" + port + "/meals/getMealClientSpecific",
                         HttpMethod.POST,
@@ -250,7 +250,6 @@ public class ConcurrencyTests {
                         new ParameterizedTypeReference<List<MealModel>>() {}
                 );
 
-//                return responseEntity.getBody();
                 return Map.entry(mealRequest, responseEntity.getBody());
             });
         }
@@ -264,6 +263,46 @@ public class ConcurrencyTests {
                 System.out.println(mealModel.getRecipe().getClient());
                 //check request response client
                 assertEquals(mealModel.getRecipe().getClient(), entry.getKey().getClientId());
+            }
+        }
+
+        executorService.shutdown();
+    }
+
+    @Test
+    public void testConcurrentGetRecipeForClientRequests() throws InterruptedException, ExecutionException {
+        int numberOfThreads = 7;
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+
+        List<Callable<Map.Entry<RecipeRequest, List<Recipe>>>> tasks = new ArrayList<>();
+
+        for (int i = 2; i < numberOfThreads; i++) {
+            RecipeRequest recipeRequest = new RecipeRequest();
+            recipeRequest.setMealType("Main Course");
+            recipeRequest.setRecipeType("Vegetarian");
+            recipeRequest.setClient(i); // Assuming clientId can be different for each thread
+
+            tasks.add(() -> {
+                ResponseEntity<List<Recipe>> responseEntity = restTemplate.exchange(
+                        "http://localhost:" + port + "/recipes/getRecipesForClient",
+                        HttpMethod.POST,
+                        new HttpEntity<>(recipeRequest),
+                        new ParameterizedTypeReference<List<Recipe>>() {}
+                );
+
+                return Map.entry(recipeRequest, responseEntity.getBody());
+            });
+        }
+
+        List<Future<Map.Entry<RecipeRequest, List<Recipe>>>> futures = executorService.invokeAll(tasks);
+
+        for (Future<Map.Entry<RecipeRequest, List<Recipe>>> future : futures) {
+            Map.Entry<RecipeRequest, List<Recipe>> entry = future.get();
+            assertNotNull(entry.getValue());
+            for (Recipe recipe : entry.getValue()) {
+                System.out.println(recipe.getClient());
+                //check request response client
+                assertEquals(recipe.getClient(), entry.getKey().getClient());
             }
         }
 
