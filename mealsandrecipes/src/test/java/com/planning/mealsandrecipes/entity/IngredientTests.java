@@ -1,14 +1,14 @@
 package com.planning.mealsandrecipes.entity;
 
 import org.junit.jupiter.api.Test;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
 
 public class IngredientTests {
 
-    private Ingredient ingredient = new Ingredient();
+    private Ingredient ingredient;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         ingredient = new Ingredient();
     }
