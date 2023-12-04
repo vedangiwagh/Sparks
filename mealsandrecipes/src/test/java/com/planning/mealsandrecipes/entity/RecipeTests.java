@@ -1,53 +1,92 @@
 package com.planning.mealsandrecipes.entity;
 
-import com.planning.mealsandrecipes.entity.Client;
-import com.planning.mealsandrecipes.entity.Recipe;
-import com.planning.mealsandrecipes.repository.RecipeRepo;
-import com.planning.mealsandrecipes.service.RecipeService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import org.junit.Before;
+import static org.mockito.Mockito.*;
 
 public class RecipeTests {
 
-    private Recipe recipe;
+    private Recipe recipe = new Recipe();
 
-    @BeforeEach
+    @Before
     public void setUp() {
-        // Create a sample recipe for testing
-        Client client = new Client();
-        recipe = new Recipe(0, "Sample Recipe", "Sample Description",
-                "Sample Instructions", 30, 60, "Breakfast", "Gluten-free");
+        recipe = new Recipe();
     }
 
     @Test
     public void testGettersAndSetters() {
-        assertEquals("Sample Recipe", recipe.getRecipeName());
-        assertEquals("Sample Description", recipe.getDescription());
-        assertEquals("Sample Instructions", recipe.getInstructions());
-        assertEquals(30, recipe.getPreparationTime());
-        assertEquals(60, recipe.getCookingTime());
+        // Test getters and setters for all fields
+        recipe.setRecipeId(1);
+        assertEquals(1, recipe.getRecipeId().intValue());
 
-        // Test setters
-        recipe.setRecipeName("New Recipe Name");
-        assertEquals("New Recipe Name", recipe.getRecipeName());
+        recipe.setClient(2);
+        assertEquals(2, recipe.getClient());
 
-        recipe.setDescription("New Description");
-        assertEquals("New Description", recipe.getDescription());
+        recipe.setRecipeName("Test Recipe");
+        assertEquals("Test Recipe", recipe.getRecipeName());
 
-        recipe.setInstructions("New Instructions");
-        assertEquals("New Instructions", recipe.getInstructions());
+        recipe.setDescription("Test Description");
+        assertEquals("Test Description", recipe.getDescription());
 
-        recipe.setPreparationTime(45);
-        assertEquals(45, recipe.getPreparationTime());
+        recipe.setInstructions("Test Instructions");
+        assertEquals("Test Instructions", recipe.getInstructions());
 
-        recipe.setCookingTime(75);
-        assertEquals(75, recipe.getCookingTime());
+        recipe.setPreparationTime(30);
+        assertEquals(30, recipe.getPreparationTime().intValue());
+
+        recipe.setCookingTime(45);
+        assertEquals(45, recipe.getCookingTime().intValue());
+
+        recipe.setMealType("Lunch");
+        assertEquals("Lunch", recipe.getMealType());
+
+        recipe.setRecipeType("Main Course");
+        assertEquals("Main Course", recipe.getRecipeType());
     }
 
+    @Test
+    public void testDefaultConstructor() {
+        assertNotNull(recipe);
+    }
+
+    @Test
+    public void testParameterizedConstructor() {
+        Recipe parameterizedRecipe = new Recipe(1, "Test Recipe", "Test Description",
+                "Test Instructions", 30, 45, "Lunch", "Main Course");
+
+        assertEquals(1, parameterizedRecipe.getClient());
+        assertEquals("Test Recipe", parameterizedRecipe.getRecipeName());
+        assertEquals("Test Description", parameterizedRecipe.getDescription());
+        assertEquals("Test Instructions", parameterizedRecipe.getInstructions());
+        assertEquals(30, parameterizedRecipe.getPreparationTime().intValue());
+        assertEquals(45, parameterizedRecipe.getCookingTime().intValue());
+        assertEquals("Lunch", parameterizedRecipe.getMealType());
+        assertEquals("Main Course", parameterizedRecipe.getRecipeType());
+    }
+
+    @Test
+    public void testSetRecipe() {
+        Recipe otherRecipe = mock(Recipe.class);
+        when(otherRecipe.getClient()).thenReturn(3);
+        when(otherRecipe.getRecipeName()).thenReturn("Other Recipe");
+        when(otherRecipe.getDescription()).thenReturn("Other Description");
+        when(otherRecipe.getInstructions()).thenReturn("Other Instructions");
+        when(otherRecipe.getPreparationTime()).thenReturn(20);
+        when(otherRecipe.getCookingTime()).thenReturn(30);
+        when(otherRecipe.getMealType()).thenReturn("Dinner");
+        when(otherRecipe.getRecipeType()).thenReturn("Dessert");
+
+        recipe.setRecipe(otherRecipe);
+
+        assertEquals(3, recipe.getClient());
+        assertEquals("Other Recipe", recipe.getRecipeName());
+        assertEquals("Other Description", recipe.getDescription());
+        assertEquals("Other Instructions", recipe.getInstructions());
+        assertEquals(20, recipe.getPreparationTime().intValue());
+        assertEquals(30, recipe.getCookingTime().intValue());
+        assertEquals("Dinner", recipe.getMealType());
+        assertEquals("Dessert", recipe.getRecipeType());
+    }
 }
