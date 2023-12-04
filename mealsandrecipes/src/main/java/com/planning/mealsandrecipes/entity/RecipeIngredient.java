@@ -22,18 +22,10 @@ public class RecipeIngredient implements Serializable {
     @Column(name = "Quantity")
     private String quantity;
 
-    // Constructors, getters, and setters
-    // Omitted for brevity
 
     public RecipeIngredient(){
 
     }
-//    public RecipeIngredient(int recipe_id, int ingredient_id, String quantity) {
-//        this.recipe_id = recipe_id;
-//        this.ingredient_id = ingredient_id;
-//        this.quantity = quantity;
-//    }
-
     public int getRecipeId() {
         return recipeId;
     }
@@ -65,4 +57,7 @@ public class RecipeIngredient implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+
+
 }
