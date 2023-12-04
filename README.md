@@ -51,9 +51,22 @@ We use the following tools and technologies for our project:
 - Test Runner for API Testing: Postman
 - Static Analysis Bug Finder: Bug Finder
 
-## Code Coverage
+## Steps to check Code Coverage
+
+```bash
+cd mealsandrecipes
+./mvnw jacoco:prepare-agent test jacoco:report
+```
+
+Open the file in the following location using the browser: 
+```
+Sparks/mealsandrecipes/target/site/jacoco/index.html
+```
+
+## Current Code Coverage
 
 ![Code Coverage](https://github.com/vedangiwagh/Sparks/raw/main/mealsandrecipes/Code-Coverage/code_coverage.png)
+
 
 ## Steps to run the Service 🎉 
 #### Clone the project
