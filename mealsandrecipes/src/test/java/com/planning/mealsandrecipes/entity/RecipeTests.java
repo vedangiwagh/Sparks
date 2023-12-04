@@ -3,14 +3,15 @@ package com.planning.mealsandrecipes.entity;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 
 public class RecipeTests {
 
-    private Recipe recipe = new Recipe();
+    private Recipe recipe;
 
-    @Before
+
+    @BeforeEach
     public void setUp() {
         recipe = new Recipe();
     }

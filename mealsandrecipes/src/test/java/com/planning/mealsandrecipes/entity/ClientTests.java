@@ -5,17 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
-import org.junit.Before;
 
 public class ClientTests {
 
-    private Client client = new Client();;
+    private Client client;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         client = new Client();
     }
