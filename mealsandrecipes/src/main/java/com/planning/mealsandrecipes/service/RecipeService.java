@@ -39,6 +39,19 @@ public class RecipeService {
         return recipes;
     }
 
+    public List<Recipe> getAllRecipesByClient(int client) {
+        if (isDatabaseEmpty()) {
+            throw new ResourceNotFoundException("No recipes found");
+        }
+        List<Recipe> recipes = recipeRepository.findAllRecipesByClient(client);
+        return recipes;
+    }
+
+    public List<Recipe> findRecipesByNameAndClient(String recipeName, int client) {
+        System.out.println("RECIPE NAME" + recipeName);
+        return recipeRepository.findByRecipeNameAndClient(recipeName,client);
+    }
+
     // Update an existing recipe with the provided data.
     public Recipe updateRecipe(Integer recipeId, Recipe recipeDetails) {
         Recipe recipe = recipeRepository.findById(Long.valueOf(recipeId))

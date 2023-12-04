@@ -70,6 +70,22 @@ public class RecipeController {
         return recipeService.findRecipesforClient(mealType, recipeType, client);
 
     }
+
+    @Operation(summary = "Returns a specific Recipe based on name.")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of Recipe")
+    @ApiResponse(responseCode = "404", description = "no Recipes")
+    @GetMapping("/byNameAndClient/{name}/{client}")
+    public List<Recipe> getRecipeByNameAndClient(@PathVariable String name, @PathVariable int client) {
+        return recipeService.findRecipesByNameAndClient(name,client);
+    }
+
+    @Operation(summary = "Returns all Recipes")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of Recipes")
+    @ApiResponse(responseCode = "404", description = "no Recipes")
+    @GetMapping("/all/{client}")
+    public List<Recipe> getAllRecipesByClient(@PathVariable int client) {
+        return recipeService.getAllRecipesByClient(client);
+    }
     // Define an endpoint to update an existing recipe.
     @PutMapping("/{recipeId}")
     @Operation(summary = "Create a new recipe")
