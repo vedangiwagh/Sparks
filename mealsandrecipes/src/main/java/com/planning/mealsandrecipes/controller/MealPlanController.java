@@ -39,7 +39,9 @@ public class MealPlanController {
         String recipeType = mealRequest.getRecipeType();
         int clientId = mealRequest.getClientId();
         String clientName = mealRequest.getClientName();
-        return mealPlanService.getMealClientSpecific(mealType, recipeType, clientId, clientName);
+        List<String> dietRestrictions = mealRequest.getDietRestriction();
+        int calorieLimit = mealRequest.getCalorieLimit();
+        return mealPlanService.getMealClientSpecific(mealType, recipeType, clientId, clientName, dietRestrictions, calorieLimit);
     }
 
 
