@@ -15,7 +15,6 @@ import java.util.Set;
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Unique identifier for the ingredient
     private String name; // Name of the ingredient
     private Double calories; // Caloric content
