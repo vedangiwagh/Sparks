@@ -1,4 +1,4 @@
-package com.planning.mealsandrecipes;
+package com.planning.mealsandrecipes.model;
 
 public class NutritionModel {
     private Double calories; // Caloric content

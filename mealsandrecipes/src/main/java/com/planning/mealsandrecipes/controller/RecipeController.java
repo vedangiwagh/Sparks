@@ -1,7 +1,7 @@
 package com.planning.mealsandrecipes.controller;
 
 import com.planning.mealsandrecipes.model.MealModel;
-import com.planning.mealsandrecipes.NutritionModel;
+import com.planning.mealsandrecipes.model.NutritionModel;
 import com.planning.mealsandrecipes.entity.Recipe;
 import com.planning.mealsandrecipes.model.RecipeRequest;
 import com.planning.mealsandrecipes.service.MealPlanService;
