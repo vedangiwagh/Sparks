@@ -12,6 +12,7 @@ import com.planning.mealsandrecipes.repository.RecipeRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +41,7 @@ public class MealPlanService {
         return mealModels;
     }
 
-    public List<MealModel> getMealClientSpecific(String mealType, String recipeType, int clientId, String clientName) {
+    public List<MealModel> getMealClientSpecific(String mealType, String recipeType, int clientId, String clientName, List<String> dietRestrictions, int calorieLimit) {
 
         Client client = new Client();
         client.setName(clientName);
@@ -48,6 +49,29 @@ public class MealPlanService {
 
         List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, clientId);
         List<MealModel> mealModels = findIngredients(recipes);
+
+        if(dietRestrictions != null || calorieLimit == 0) {
+
+            Iterator<MealModel> iterator = mealModels.iterator();
+            while (iterator.hasNext()) {
+                MealModel mealModel = iterator.next();
+
+                // Check if it contains ingredients from diet restrictions
+                if (dietRestrictions != null && containsIngredient(mealModel.getIngredientList(), dietRestrictions)) {
+
+                    iterator.remove();
+                    continue; // Continue to the next iteration
+                }
+
+                // Check if calories exceed the limit
+                if (mealModel.getNutritionModel().getCalories() != null && mealModel.getNutritionModel().getCalories() > calorieLimit) {
+                    System.out.println("calories " + mealModel.getNutritionModel().getCalories());
+                    iterator.remove();
+                    continue;
+                }
+            }
+        }
+
 
         return mealModels;
     }
@@ -57,6 +81,7 @@ public class MealPlanService {
         for(Recipe r : recipes){
             MealModel mealModel = new MealModel();
             NutritionModel nutritionModel = new NutritionModel();
+            System.out.println(r.getRecipeName());
             mealModel.setRecipe(r);
             List<RecipeIngredient> recipeIngredients = recipeIngredientRepo.findByRecipeId(r.getRecipeId());
             List<String>  ingredientsList = new ArrayList<>();
@@ -113,6 +138,21 @@ public class MealPlanService {
         }
 
         return mealModels;
+    }
+
+    public static boolean containsIngredient(List<String> ingredients, List<String> dietRestrictions) {
+
+        for (String dietRestriction : dietRestrictions) {
+            for (String ingredient : ingredients) {
+                // Check if ingredient contains the diet restriction as a substring (case-insensitive)
+                if (ingredient.toLowerCase().contains(dietRestriction.toLowerCase())) {
+                    System.out.println("diet " + dietRestriction);
+                    return true; // Return true if there is a match
+                }
+            }
+        }
+
+        return false;
     }
 
 }

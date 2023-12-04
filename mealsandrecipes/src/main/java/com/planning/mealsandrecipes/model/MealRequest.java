@@ -1,8 +1,21 @@
 package com.planning.mealsandrecipes.model;
 
+import java.util.ArrayList;
+
 public class MealRequest {
     private String mealType;
     private String recipeType;
+    private ArrayList<String> dietRestriction;
+
+    public int getCalorieLimit() {
+        return calorieLimit;
+    }
+
+    public void setCalorieLimit(int calorieLimit) {
+        this.calorieLimit = calorieLimit;
+    }
+
+    private int calorieLimit = Integer.MAX_VALUE;
     private int clientId;
     private String clientName;
 
@@ -39,6 +52,11 @@ public class MealRequest {
     public void setClientName(String clientName) {
         this.clientName = clientName;
     }
+    public ArrayList<String> getDietRestriction() {
+        return dietRestriction;
+    }
 
-    // You can use your IDE or Lombok to generate these automatically
+    public void setDietRestriction(ArrayList<String> dietRestriction) {
+        this.dietRestriction = dietRestriction;
+    }
 }
