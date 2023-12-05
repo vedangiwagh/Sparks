@@ -11,14 +11,19 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class RecipeIngredientControllerTest {
@@ -95,6 +100,62 @@ public class RecipeIngredientControllerTest {
 
         verify(recipeIngredientService, times(1)).saveAll(anyList());
         verifyNoMoreInteractions(recipeIngredientService);
+    }
+
+    @Test
+    void getAllRecipeIngredients() throws Exception {
+        // Arrange
+        RecipeIngredient recipeIngredient1 = new RecipeIngredient();
+        recipeIngredient1.setQuantity("200g Flour");
+        recipeIngredient1.setRecipeId(1);
+
+        RecipeIngredient recipeIngredient2 = new RecipeIngredient();
+        recipeIngredient2.setQuantity("300g Sugar");
+        recipeIngredient2.setRecipeId(2);
+
+        List<RecipeIngredient> recipeIngredients = Arrays.asList(recipeIngredient1, recipeIngredient2);
+
+        when(recipeIngredientService.getAll()).thenReturn(recipeIngredients);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe-ingredients")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].quantity").value(recipeIngredient1.getQuantity()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].quantity").value(recipeIngredient2.getQuantity()))
+                .andDo(print());
+
+        // Verify
+        verify(recipeIngredientService, times(1)).getAll();
+    }
+
+    @Test
+    void getAllRecipeIngredientsByRecipeId() throws Exception {
+        // Arrange
+        int recipeId = 1;
+
+        RecipeIngredient ingredient1 = new RecipeIngredient();
+        ingredient1.setQuantity("200g Flour");
+        ingredient1.setRecipeId(1);
+
+
+        RecipeIngredient ingredient2 = new RecipeIngredient();
+        ingredient2.setQuantity("300g Sugar");
+        ingredient2.setRecipeId(2);
+
+        List<RecipeIngredient> ingredients = Arrays.asList(ingredient1, ingredient2);
+
+        when(recipeIngredientService.findRecipesById(recipeId)).thenReturn(Collections.singletonList(ingredient1));
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe-ingredients/{id}", recipeId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].recipeId").value(ingredient1.getRecipeId()))
+                .andDo(print());
+
+        // Verify
+        verify(recipeIngredientService, times(1)).findRecipesById(recipeId);
     }
 
     // Helper method to convert objects to JSON string

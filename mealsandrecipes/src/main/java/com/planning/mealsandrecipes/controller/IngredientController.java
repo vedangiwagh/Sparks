@@ -68,36 +68,5 @@ public class IngredientController {
         ingredientService.delete(id);
     }
 
-    // Define exception handling for NoSuchElementException.
-    @ExceptionHandler(value = NoSuchElementException.class)
-    public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e) {
-        return ResponseEntity
-                .badRequest()
-                .body(e.getMessage());
-    }
 
-    // Define a more general exception handler to handle various exceptions.
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<?> handleGenericException(Exception e) {
-        String message;
-
-        if (e instanceof HttpMessageNotReadableException) {
-            message = "Error while parsing JSON. Please enter valid inputs.";
-        }
-        else if (e instanceof MethodArgumentTypeMismatchException) {
-            message = "Wrong argument type. Please try again.";
-        }
-        else if (e instanceof NumberFormatException) {
-            message = "Please enter a valid number.";
-        }
-        else if (e instanceof HttpRequestMethodNotSupportedException) {
-            message = "Wrong request method. Please try again.";
-        }
-        else {
-            message = e.getMessage();
-        }
-        return ResponseEntity
-                .badRequest()
-                .body((message));
-    }
 }
