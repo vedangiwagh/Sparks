@@ -22,7 +22,6 @@ public class RecipeController {
     @Autowired
     private MealPlanService mealPlanService;
 
-    // Define an endpoint to create a new recipe.
 
     @Operation(summary = "Create a new Recipe")
     @ApiResponse(responseCode = "201", description = "Recipe created successfully")

@@ -77,6 +77,6 @@ public class RecipeService {
     }
 
     public boolean isDatabaseEmpty() {
-        return recipeRepository.count() == 0;
+        return recipeRepository.count() == 0L;
     }
 }
