@@ -24,14 +24,6 @@ public class MealPlanController {
         return mealPlanService.getMeal(mealType, recipeType);
     }
 
-//    @Operation(summary = "Returns a specific mealPlan based on given parameters specific to client.")
-//    @ApiResponse(responseCode = "200", description = "Successful retrieval of mealPlan")
-//    @ApiResponse(responseCode = "404", description = "no mealPlan for client")
-//    @GetMapping("/{mealType}/{recipeType}/{clientId}/{clientName}")
-//    public List<MealModel> getMealClientSpecific(@PathVariable String mealType, @PathVariable String recipeType,
-//                                   @PathVariable int clientId, @PathVariable String clientName) {
-//        return mealPlanService.getMealClientSpecific(mealType, recipeType, clientId, clientName);
-//    }
 
     @PostMapping("/getMealClientSpecific")
     public List<MealModel> getMealClientSpecific(@RequestBody MealRequest mealRequest) {

@@ -50,8 +50,7 @@ public class MealPlanService {
         List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, clientId);
         List<MealModel> mealModels = findIngredients(recipes);
 
-        if(dietRestrictions != null || calorieLimit == 0) {
-
+        if(dietRestrictions != null || calorieLimit != 0) {
             Iterator<MealModel> iterator = mealModels.iterator();
             while (iterator.hasNext()) {
                 MealModel mealModel = iterator.next();
