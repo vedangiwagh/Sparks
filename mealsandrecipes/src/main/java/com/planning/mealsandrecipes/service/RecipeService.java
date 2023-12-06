@@ -16,7 +16,6 @@ public class RecipeService {
     // Create a new recipe and save it to the repository.
     public Integer createRecipe(Recipe recipe) {
         Recipe createdRecipe = recipeRepository.save(recipe);
-
         // Return the auto-generated ID
         return createdRecipe.getRecipeId();
     }
