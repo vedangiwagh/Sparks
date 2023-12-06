@@ -108,14 +108,14 @@ class RecipeServiceTest {
         // Arrange
         String recipeName = "Test Recipe";
         int clientId = 1;
-        when(recipeRepository.findByRecipeNameAndClient(recipeName, clientId)).thenReturn(Arrays.asList(new Recipe(), new Recipe()));
+        when(recipeRepository.findByRecipeNameContainingIgnoreCaseAndClient(recipeName, clientId)).thenReturn(Arrays.asList(new Recipe(), new Recipe()));
 
         // Act
         List<Recipe> recipes = recipeService.findRecipesByNameAndClient(recipeName, clientId);
 
         // Assert
         assertEquals(2, recipes.size());
-        verify(recipeRepository, times(1)).findByRecipeNameAndClient(recipeName, clientId);
+        verify(recipeRepository, times(1)).findByRecipeNameContainingIgnoreCaseAndClient(recipeName, clientId);
     }
 
     @Test
@@ -153,14 +153,14 @@ class RecipeServiceTest {
     void findRecipesByName() {
         // Arrange
         String recipeName = "Test Recipe";
-        when(recipeRepository.findByRecipeName(recipeName)).thenReturn(Arrays.asList(new Recipe(), new Recipe()));
+        when(recipeRepository.findByRecipeNameContainingIgnoreCase(recipeName)).thenReturn(Arrays.asList(new Recipe(), new Recipe()));
 
         // Act
         List<Recipe> recipes = recipeService.findRecipesByName(recipeName);
 
         // Assert
         assertEquals(2, recipes.size());
-        verify(recipeRepository, times(1)).findByRecipeName(recipeName);
+        verify(recipeRepository, times(1)).findByRecipeNameContainingIgnoreCase(recipeName);
     }
 
     @Test
