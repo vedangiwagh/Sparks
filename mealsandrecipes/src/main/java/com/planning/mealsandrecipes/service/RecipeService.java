@@ -51,7 +51,7 @@ public class RecipeService {
 
     public List<Recipe> findRecipesByNameAndClient(String recipeName, int client) {
         System.out.println("RECIPE NAME" + recipeName);
-        return recipeRepository.findByRecipeNameAndClient(recipeName,client);
+        return recipeRepository.findByRecipeNameContainingIgnoreCaseAndClient(recipeName,client);
     }
 
     // Update an existing recipe with the provided data.
@@ -67,7 +67,7 @@ public class RecipeService {
 
     public List<Recipe> findRecipesByName(String recipeName) {
         System.out.println("RECIPE NAME" + recipeName);
-        return recipeRepository.findByRecipeName(recipeName);
+        return recipeRepository.findByRecipeNameContainingIgnoreCase(recipeName);
     }
 
     public List<Recipe> findRecipesforClient(String mealType, String recipeType, int client) {

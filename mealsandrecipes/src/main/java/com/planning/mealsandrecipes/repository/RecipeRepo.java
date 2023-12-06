@@ -11,6 +11,8 @@ import java.util.List;
 // It extends JpaRepository to provide access to CRUD operations for recipes.
 public interface RecipeRepo extends JpaRepository<Recipe, Long> {
 
+    List<Recipe> findByRecipeNameContainingIgnoreCase(@Param("recipename")String recipeName);
+
     List<Recipe> findByRecipeName(@Param("recipename")String recipeName);
 
     List<Recipe> findByRecipeType(@Param("recipetype")String recipeType);
@@ -23,6 +25,7 @@ public interface RecipeRepo extends JpaRepository<Recipe, Long> {
 
     List<Recipe> findAllRecipesByClient(@Param("client")int client);
 
+    List<Recipe> findByRecipeNameContainingIgnoreCaseAndClient(@Param("recipename")String recipeName, @Param("client") int client);
     List<Recipe> findByRecipeNameAndClient(@Param("recipename")String recipeName, @Param("client") int client);
 
 
