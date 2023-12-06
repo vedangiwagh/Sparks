@@ -22,6 +22,10 @@ public class IngredientService {
         return ingredientRepository.findById(id).orElse(null);
     }
 
+    public List<Ingredient> getByName(String name) {
+        return ingredientRepository.findByNameContainingIgnoreCase(name);
+    }
+
     // Retrieve a list of all ingredients.
     public List<Ingredient> getAll() {
         return ingredientRepository.findAll();
@@ -35,5 +39,7 @@ public class IngredientService {
     public List<Ingredient> saveAll(List<Ingredient> ingredientsList) {
         return ingredientRepository.saveAll(ingredientsList);
     }
+
+
 
 }

@@ -37,6 +37,14 @@ public class IngredientController {
         return ingredientService.getById(id);
     }
 
+    @Operation(summary = "Returns a specific ingredient based on given parameter.")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of ingredients")
+    @ApiResponse(responseCode = "404", description = "no ingredients")
+    @GetMapping(value = "/byName/{name}")
+    public List<Ingredient> getIngredientByName(@Parameter(description = "ID of the ingredient.", example = "1") @PathVariable String name) {
+        return ingredientService.getByName(name);
+    }
+
     // Define an endpoint to get a list of all ingredients in the database.
     @ApiResponse(responseCode = "200", description = "Successful retrieval of ingredients")
     @ApiResponse(responseCode = "404", description = "Ingredient not exist with id")
