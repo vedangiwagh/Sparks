@@ -1,6 +1,5 @@
 package com.planning.mealsandrecipes.service;
 
-import com.planning.mealsandrecipes.entity.Client;
 import com.planning.mealsandrecipes.entity.Recipe;
 import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.repository.RecipeRepo;
@@ -15,8 +14,11 @@ public class RecipeService {
     public  RecipeRepo recipeRepository;
 
     // Create a new recipe and save it to the repository.
-    public Recipe createRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+    public Integer createRecipe(Recipe recipe) {
+        Recipe createdRecipe = recipeRepository.save(recipe);
+
+        // Return the auto-generated ID
+        return createdRecipe.getRecipeId();
     }
 
     // Retrieve a recipe by its ID.
@@ -56,10 +58,10 @@ public class RecipeService {
     public Recipe updateRecipe(Integer recipeId, Recipe recipeDetails) {
         Recipe recipe = recipeRepository.findById(Long.valueOf(recipeId))
                 .orElseThrow(() -> new ResourceNotFoundException
-                        ("Client not exist with id :" + recipeId));
+                        ("Recipe not exist with id :" + recipeId));
         recipe.setRecipe(recipeDetails);
         Recipe updatedRecipe = recipeRepository.save(recipe);
-        System.out.println("CLIENT NOT FOUND");
+//        System.out.println("CLIENT NOT FOUND");
         return updatedRecipe;
     }
 

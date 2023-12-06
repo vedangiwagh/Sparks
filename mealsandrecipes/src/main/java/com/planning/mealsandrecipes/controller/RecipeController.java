@@ -26,7 +26,7 @@ public class RecipeController {
     @Operation(summary = "Create a new Recipe")
     @ApiResponse(responseCode = "201", description = "Recipe created successfully")
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
+    public Integer createRecipe(@RequestBody Recipe recipe) {
         return recipeService.createRecipe(recipe);
     }
 
