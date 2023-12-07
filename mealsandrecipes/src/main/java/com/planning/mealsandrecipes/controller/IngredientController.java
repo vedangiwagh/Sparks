@@ -61,6 +61,13 @@ public class IngredientController {
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
         return ingredientService.save(ingredient);
     }
+    @PostMapping("/llm/{ingredientName}")
+    @Operation(summary = "Create a new ingredient using openai")
+    @ApiResponse(responseCode = "201", description = "ingredient created successfully")
+    public Ingredient createIngredientUsingOpenAI(@PathVariable String ingredientName) {
+        return ingredientService.createIngredientUsingLLM(ingredientName);
+    }
+
 
     @PostMapping("/bulk")
     @Operation(summary = "Create a new ingredients in bulk")
