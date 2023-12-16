@@ -4,6 +4,7 @@ package com.planning.mealsandrecipes.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.json.Json;
+import com.planning.mealsandrecipes.model.NutritionModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import com.planning.mealsandrecipes.entity.Client;
@@ -24,7 +25,7 @@ import java.util.List;
 @Service
 public class IngredientService {
    // Add your API key in application.properties or application.yml
-    private String apiKey = "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";
+    private String apiKey = "<KEY>";
     @Autowired
     private IngredientRepo ingredientRepository;
 
@@ -61,17 +62,8 @@ public class IngredientService {
         Ingredient ingredient = new Ingredient() ;
         System.out.println("In llm part now");
         System.out.println(ingredientName);
-String prompt = "get nutritional model for ingredient "+ ingredientName+"  in the format below. {  name: Chicken Breast, calories: 165.0, fat: 3.6, carbohydrates: 0.0, fiber: 0.0, sugar: 0.0, protein: 31.0, sodium: 74.0";
+String prompt = "in json format get nutritional model for ingredient "+ ingredientName+"  in the format below. {  name: Chicken Breast, calories: 165.0, fat: 3.6, carbohydrates: 0.0, fiber: 0.0, sugar: 0.0, protein: 31.0, sodium: 74.0";
 String llmresponse = new String();
-//        String openaiUrl = "https://api.openai.com/v1/engines/davinci/completions";
-//
-//        // Replace with your specific prompt format and API key handling
-//        String requestBody = "{ \"prompt\": \"" + prompt + "\", \"max_tokens\": 20 }";
-//
-//        // Set the OpenAI API key in the headers
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("Authorization", "Bearer " + apiKey);
-//        headers.setContentType(MediaType.APPLICATION_JSON);
         String openaiUrl = "https://api.openai.com/v1/chat/completions";
 
         // Construct request body
@@ -98,52 +90,68 @@ String llmresponse = new String();
             // Handle error cases
             System.err.println( "Error: " + responseEntity.getStatusCode());
         }
+        ingredient = convertToJson(llmresponse);
+        int size = ingredientRepository.findAll().size();
+        ingredient.setId(Long.valueOf(size + 1));
+//System.out.println(llmresponse);
+        ingredientRepository.save(ingredient);
+    return ingredient;
+    }
 
-        System.out.println(llmresponse);
-        ObjectMapper objectMapper = new ObjectMapper();
+
+    public Ingredient convertToJson(String s){
+        String jsonString = "{\"id\":\"chatcmpl-8TFb3JcYsmn2Bu5O4rjmy1E6abKKB\",\"object\":\"chat.completion\",\"created\":1701982157,\"model\":\"gpt-3.5-turbo-0613\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"The nutritional model for spinach is as follows:\\n{\\n  name: \\\"Spinach\\\",\\n  calories: 23.0,\\n  fat: 0.4,\\n  carbohydrates: 3.6,\\n  fiber: 2.2,\\n  sugar: 0.4,\\n  protein: 2.9,\\n  sodium: 79.0\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":74,\"completion_tokens\":74,\"total_tokens\":148}}";
+//        String jsonString = s;
+        Ingredient ingredient = null;
         try {
-            JsonNode jsonNode = objectMapper.readTree(llmresponse);
+            // Create ObjectMapper
+            ObjectMapper objectMapper = new ObjectMapper();
 
-            // Accessing values
-            String name = jsonNode.get("choices").asText();
-            String content = jsonNode.get("content").asText();
+            // Convert string to JsonNode
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
 
+            // Extract content from JsonNode
+            String content = jsonNode
+                    .path("choices")
+                    .path(0)
+                    .path("message")
+                    .path("content")
+                    .asText();
 
-            // Printing values
-            System.out.println("Name: " + name);
-            System.out.println("Age: " + content);
+            // Print the content
+            System.out.println("Content: " + content);
+
+            try {
+                // Create ObjectMapper
+                ObjectMapper objectMapper1 = new ObjectMapper();
+
+                // Remove newlines and extra spaces to make the content a valid JSON
+                String cleanedJsonString = content.replaceAll("\n", "").replaceAll(" +", " ");
+
+                // Extract the JSON substring
+                int startIndex = cleanedJsonString.indexOf('{');
+                int endIndex = cleanedJsonString.lastIndexOf('}');
+                String jsonSubstring = cleanedJsonString.substring(startIndex, endIndex + 1);
+                jsonSubstring = jsonSubstring.replaceAll("(\\w+):", "\"$1\":");
+                System.out.println("JSON AFTER :::"+ jsonSubstring);
+                // Map string to Ingredient
+                ingredient = objectMapper1.readValue(jsonSubstring, Ingredient.class);
+
+                // Print the mapped Ingredient
+                System.out.println("Ingredient: " + ingredient);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//            ingredient = objectMapper.readValue(substringAfterColon, Ingredient.class);
+            return ingredient;
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-//System.out.println(llmresponse);
-return ingredient;
+
+        return ingredient;
     }
-
-//    public String getOpenAICompletion(String prompt) {
-//        String openaiUrl = "https://api.openai.com/v1/engines/davinci/completions";
-//
-//        // Replace with your specific prompt format and API key handling
-//        String requestBody = "{ \"prompt\": \"" + prompt + "\", \"max_tokens\": 150 }";
-//
-//        // Set the OpenAI API key in the headers
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("Authorization", "Bearer " + apiKey);
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-//
-//        // Make the HTTP request
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<String> responseEntity = restTemplate.postForEntity(openaiUrl, requestEntity, String.class);
-//
-//        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-//            return responseEntity.getBody();
-//        } else {
-//            // Handle error cases
-//            return "Error: " + responseEntity.getStatusCode();
-//        }
-//    }
-
 
 }
