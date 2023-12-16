@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class IngredientService {
    // Add your API key in application.properties or application.yml
-    private String apiKey = "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";
+    private String apiKey = "<KEY>";
     @Autowired
     private IngredientRepo ingredientRepository;
 
@@ -100,8 +100,8 @@ String llmresponse = new String();
 
 
     public Ingredient convertToJson(String s){
-//        String jsonString = "{\"id\":\"chatcmpl-8TFb3JcYsmn2Bu5O4rjmy1E6abKKB\",\"object\":\"chat.completion\",\"created\":1701982157,\"model\":\"gpt-3.5-turbo-0613\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"The nutritional model for spinach is as follows:\\n{\\n  name: \\\"Spinach\\\",\\n  calories: 23.0,\\n  fat: 0.4,\\n  carbohydrates: 3.6,\\n  fiber: 2.2,\\n  sugar: 0.4,\\n  protein: 2.9,\\n  sodium: 79.0\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":74,\"completion_tokens\":74,\"total_tokens\":148}}";
-        String jsonString = s;
+        String jsonString = "{\"id\":\"chatcmpl-8TFb3JcYsmn2Bu5O4rjmy1E6abKKB\",\"object\":\"chat.completion\",\"created\":1701982157,\"model\":\"gpt-3.5-turbo-0613\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"The nutritional model for spinach is as follows:\\n{\\n  name: \\\"Spinach\\\",\\n  calories: 23.0,\\n  fat: 0.4,\\n  carbohydrates: 3.6,\\n  fiber: 2.2,\\n  sugar: 0.4,\\n  protein: 2.9,\\n  sodium: 79.0\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":74,\"completion_tokens\":74,\"total_tokens\":148}}";
+//        String jsonString = s;
         Ingredient ingredient = null;
         try {
             // Create ObjectMapper
