@@ -88,25 +88,24 @@ public class MealPlanService {
             {
                 String recipeIngredientQuantity = recipeIngredient.getQuantity(); //getting the recipe ingredients
                 ingredientsList.add(recipeIngredientQuantity);
-
-                //regex pattern to detect number
-                String pattern = "^(\\d+)";
-                Pattern reg = Pattern.compile(pattern);
-                Matcher m = reg.matcher(recipeIngredientQuantity);//match the regex
                 Float quant = 0.0F;
-                if(m.find()) //if pattern found
-                {
-                    String extractedText = m.group();
-                    System.out.println(extractedText);
-                    float num = Float.parseFloat(extractedText);
-                    if(num>10){
-                        quant=num/100; // for quantity in gram calculation
-                    }
-                    else{
-                        quant=num; // for whole quantity calcuation
+                if(recipeIngredientQuantity != null) {
+                    //regex pattern to detect number
+                    String pattern = "^(\\d+)";
+                    Pattern reg = Pattern.compile(pattern);
+                    Matcher m = reg.matcher(recipeIngredientQuantity);//match the regex
+                    if (m.find()) //if pattern found
+                    {
+                        String extractedText = m.group();
+                        System.out.println(extractedText);
+                        float num = Float.parseFloat(extractedText);
+                        if (num > 10) {
+                            quant = num / 100; // for quantity in gram calculation
+                        } else {
+                            quant = num; // for whole quantity calcuation
+                        }
                     }
                 }
-
                 Ingredient ingredient = ingredientRepo.findById(recipeIngredient.getIngredient_id()).orElse(null);
                 assert ingredient != null;
                 if(nutritionModel.getCalories()!=null) {

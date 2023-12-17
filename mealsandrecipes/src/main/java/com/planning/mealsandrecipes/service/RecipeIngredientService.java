@@ -9,12 +9,14 @@ import java.util.List;
 
 @Service
 public class RecipeIngredientService {
+
     private final RecipeIngredientRepo recipeIngredientRepository;
 
     @Autowired
     public RecipeIngredientService(RecipeIngredientRepo recipeIngredientRepository) {
         this.recipeIngredientRepository = recipeIngredientRepository;
     }
+
 
     // save single recipe ingredient
     public RecipeIngredient save(RecipeIngredient recipeIngredient) {

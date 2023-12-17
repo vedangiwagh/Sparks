@@ -4,8 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.planning.mealsandrecipes.entity.Ingredient;
 import com.planning.mealsandrecipes.entity.Recipe;
+import com.planning.mealsandrecipes.entity.RecipeIngredient;
 import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
+import com.planning.mealsandrecipes.repository.IngredientRepo;
+import com.planning.mealsandrecipes.repository.RecipeIngredientRepo;
 import com.planning.mealsandrecipes.repository.RecipeRepo;
+import jnr.ffi.annotations.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,16 @@ public class RecipeService {
     @Autowired
     public  RecipeRepo recipeRepository;
 
+    private final IngredientRepo ingredientRepo;
+
+    private final RecipeIngredientRepo recipeIngredientRepo;
+
+
+    public RecipeService(RecipeRepo recipeRepository, IngredientRepo ingredientRepo, RecipeIngredientRepo recipeIngredientRepo) {
+        this.recipeRepository = recipeRepository;
+        this.ingredientRepo = ingredientRepo;
+        this.recipeIngredientRepo = recipeIngredientRepo;
+    }
     private String apiKey = "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";
 
     // Create a new recipe and save it to the repository.
@@ -99,6 +113,24 @@ public class RecipeService {
     //      else add new ingredient and get new id and save in array
     // add recipe-ingredient mapping for particular recipe
     // }
+    public void insertIntoDB(Recipe recipe, ArrayList<String> ingredients){
+//        int recipeId = recipeRepository.findAll().size() + 1;
+        recipe.setClient(2);
+        createRecipe(recipe);
+        System.out.println("Added recipe with id : " + recipe.getRecipeId());
+        for (String ingredient : ingredients) {
+            List<Ingredient> ingredientList = ingredientRepo.findByNameContainingIgnoreCase(ingredient);
+            if(!ingredientList.isEmpty()){
+                Ingredient i = ingredientList.get(0);
+                RecipeIngredient recipeIngredient = new RecipeIngredient();
+                recipeIngredient.setIngredient_id(i.getId());
+                recipeIngredient.setRecipeId(recipe.getRecipeId());
+                recipeIngredientRepo.save(recipeIngredient);
+                System.out.println("Added recipe Ingredient mapping for " + i.getName());
+            }
+
+        }
+    }
 
     public Recipe generateRecipeUsingLLM(String recipeName){
         Recipe recipe = null;
@@ -150,17 +182,20 @@ public class RecipeService {
 
             // Print the content
             System.out.println("Content: " + content);
-            ArrayList<String> ingredientList = extractJson(content, recipe );
+            recipe = extractJson(content, recipe );
 
         } catch (Exception e) {
-            throw new ResourceNotFoundException("no content found");
+
+//            e.printStackTrace();
+
+            throw new ResourceNotFoundException("no content found " + e);
 //            e.printStackTrace();
         }
-
+        recipe.setClient(2);
         return recipe;
     }
 
-    public ArrayList<String> extractJson(String content, Recipe recipe) {
+    public Recipe extractJson(String content, Recipe recipe) {
         ArrayList<String> ingredientList = null;
 
 //        String jsonString = "{\n" +
@@ -208,10 +243,13 @@ public class RecipeService {
 
         } catch (IOException e) {
 
-            throw new ResourceNotFoundException("no json found recipe not generated");
+            throw new ResourceNotFoundException("no json found recipe not generated " + e);
 
 //            e.printStackTrace();
         }
-        return ingredientList;
+
+        insertIntoDB(recipe, ingredientList);
+
+        return recipe;
     }
 }
