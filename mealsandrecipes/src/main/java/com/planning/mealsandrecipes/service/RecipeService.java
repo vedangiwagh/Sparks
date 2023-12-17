@@ -113,20 +113,21 @@ public class RecipeService {
     //      else add new ingredient and get new id and save in array
     // add recipe-ingredient mapping for particular recipe
     // }
-    public void insertIntoDB(Recipe recipe, ArrayList<String> ingredients){
+    public void insertIntoDB(Recipe recipe, ArrayList<String> ingredients, ArrayList<String> quantityList){
 //        int recipeId = recipeRepository.findAll().size() + 1;
         recipe.setClient(2);
         createRecipe(recipe);
         System.out.println("Added recipe with id : " + recipe.getRecipeId());
-        for (String ingredient : ingredients) {
-            List<Ingredient> ingredientList = ingredientRepo.findByNameContainingIgnoreCase(ingredient);
+        for (int i = 0; i < ingredients.size(); i++) {
+            List<Ingredient> ingredientList = ingredientRepo.findByNameContainingIgnoreCase(ingredients.get(i));
             if(!ingredientList.isEmpty()){
-                Ingredient i = ingredientList.get(0);
+                Ingredient in = ingredientList.get(0);
                 RecipeIngredient recipeIngredient = new RecipeIngredient();
-                recipeIngredient.setIngredient_id(i.getId());
+                recipeIngredient.setIngredient_id(in.getId());
                 recipeIngredient.setRecipeId(recipe.getRecipeId());
+                recipeIngredient.setQuantity(quantityList.get(i));
                 recipeIngredientRepo.save(recipeIngredient);
-                System.out.println("Added recipe Ingredient mapping for " + i.getName());
+                System.out.println("Added recipe Ingredient mapping for " + in.getName());
             }
 
         }
@@ -136,7 +137,7 @@ public class RecipeService {
         Recipe recipe = null;
         System.out.println("In llm part now");
         System.out.println(recipeName);
-        String prompt = "given recipe name generate sample recipe in json format like below - recipe: recipe: { recipeName: bean and rice bowl, description: A protein-packed bowl with black beans and rice., instructions: 1. Cook beans and rice. 2. Combine in a bowl., preparationTime: 20, cookingTime: 25,mealType: Main Course, recipeType: Vegetarian, client: 2},and ingredients list like below - ingredientList: [ Black Beans,Rice ] for recipename = " + recipeName;
+        String prompt = "given recipe name generate sample recipe in json format like below - recipe: recipe: { recipeName: bean and rice bowl, description: A protein-packed bowl with black beans and rice., instructions: 1. Cook beans and rice. 2. Combine in a bowl., preparationTime: 20, cookingTime: 25,mealType: Main Course, recipeType: Vegetarian, client: 2},and ingredients list like below - ingredientList: [ Black Beans,Rice ] and corresponding quantityList: [1 cup, 1 cup] for recipename = " + recipeName;
         String llmresponse = new String();
         String openaiUrl = "https://api.openai.com/v1/chat/completions";
 
@@ -197,6 +198,7 @@ public class RecipeService {
 
     public Recipe extractJson(String content, Recipe recipe) {
         ArrayList<String> ingredientList = null;
+        ArrayList<String> quantityList = null;
 
 //        String jsonString = "{\n" +
 //                "  \"recipe\": {\n" +
@@ -237,6 +239,10 @@ public class RecipeService {
             JsonNode ingredientListNode = jsonNode.get("ingredientList");
             ingredientList = objectMapper.convertValue(ingredientListNode, ArrayList.class);
 
+            // Extract quantity list
+            JsonNode quantityListNode = jsonNode.get("quantityList");
+            quantityList = objectMapper.convertValue(quantityListNode, ArrayList.class);
+
             // Print the extracted data
             System.out.println("Recipe: " + recipe);
             System.out.println("Ingredient List: " + ingredientList);
@@ -248,7 +254,7 @@ public class RecipeService {
 //            e.printStackTrace();
         }
 
-        insertIntoDB(recipe, ingredientList);
+        insertIntoDB(recipe, ingredientList, quantityList);
 
         return recipe;
     }
