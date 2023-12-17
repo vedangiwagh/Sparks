@@ -34,7 +34,7 @@ public class RecipeService {
         this.ingredientRepo = ingredientRepo;
         this.recipeIngredientRepo = recipeIngredientRepo;
     }
-    private String apiKey = "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";
+    private String apiKey = "KEY";
 
     // Create a new recipe and save it to the repository.
     public Integer createRecipe(Recipe recipe) {

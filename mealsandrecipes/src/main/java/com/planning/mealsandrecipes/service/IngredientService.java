@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 public class IngredientService {
    // Add your API key in application.properties or application.yml
-    private String apiKey = "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";
+    private String apiKey = "KEY";
     @Autowired
     private IngredientRepo ingredientRepository;
 
