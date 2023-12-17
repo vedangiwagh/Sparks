@@ -4,6 +4,8 @@ package com.planning.mealsandrecipes.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.json.Json;
+import com.planning.mealsandrecipes.exception.CustomErrorResponse;
+import com.planning.mealsandrecipes.exception.ResourceNotFoundException;
 import com.planning.mealsandrecipes.model.NutritionModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
@@ -25,7 +27,7 @@ import java.util.List;
 @Service
 public class IngredientService {
    // Add your API key in application.properties or application.yml
-    private String apiKey = "<KEY>";
+    private String apiKey = "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";
     @Autowired
     private IngredientRepo ingredientRepository;
 
@@ -62,8 +64,8 @@ public class IngredientService {
         Ingredient ingredient = new Ingredient() ;
         System.out.println("In llm part now");
         System.out.println(ingredientName);
-String prompt = "in json format get nutritional model for ingredient "+ ingredientName+"  in the format below. {  name: Chicken Breast, calories: 165.0, fat: 3.6, carbohydrates: 0.0, fiber: 0.0, sugar: 0.0, protein: 31.0, sodium: 74.0";
-String llmresponse = new String();
+        String prompt = "in json format get sample nutritional model for ingredient "+ ingredientName+"  in the format below. {  name: Chicken Breast, calories: 165.0, fat: 3.6, carbohydrates: 0.0, fiber: 0.0, sugar: 0.0, protein: 31.0, sodium: 74.0";
+        String llmresponse = new String();
         String openaiUrl = "https://api.openai.com/v1/chat/completions";
 
         // Construct request body
@@ -91,17 +93,20 @@ String llmresponse = new String();
             System.err.println( "Error: " + responseEntity.getStatusCode());
         }
         ingredient = convertToJson(llmresponse);
+        if(ingredient == null){
+           throw new ResourceNotFoundException("Nutrtion model could not be genegrated for ingredient" + ingredientName);
+        }
         int size = ingredientRepository.findAll().size();
         ingredient.setId(Long.valueOf(size + 1));
-//System.out.println(llmresponse);
+        System.out.println("LLM : " + llmresponse);
         ingredientRepository.save(ingredient);
     return ingredient;
     }
 
 
     public Ingredient convertToJson(String s){
-        String jsonString = "{\"id\":\"chatcmpl-8TFb3JcYsmn2Bu5O4rjmy1E6abKKB\",\"object\":\"chat.completion\",\"created\":1701982157,\"model\":\"gpt-3.5-turbo-0613\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"The nutritional model for spinach is as follows:\\n{\\n  name: \\\"Spinach\\\",\\n  calories: 23.0,\\n  fat: 0.4,\\n  carbohydrates: 3.6,\\n  fiber: 2.2,\\n  sugar: 0.4,\\n  protein: 2.9,\\n  sodium: 79.0\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":74,\"completion_tokens\":74,\"total_tokens\":148}}";
-//        String jsonString = s;
+//        String jsonString = "{\"id\":\"chatcmpl-8TFb3JcYsmn2Bu5O4rjmy1E6abKKB\",\"object\":\"chat.completion\",\"created\":1701982157,\"model\":\"gpt-3.5-turbo-0613\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"The nutritional model for spinach is as follows:\\n{\\n  name: \\\"Spinach\\\",\\n  calories: 23.0,\\n  fat: 0.4,\\n  carbohydrates: 3.6,\\n  fiber: 2.2,\\n  sugar: 0.4,\\n  protein: 2.9,\\n  sodium: 79.0\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":74,\"completion_tokens\":74,\"total_tokens\":148}}";
+        String jsonString = s;
         Ingredient ingredient = null;
         try {
             // Create ObjectMapper
@@ -120,7 +125,9 @@ String llmresponse = new String();
 
             // Print the content
             System.out.println("Content: " + content);
-
+            if(!content.contains("{") || content.toLowerCase().contains("sorry") ){
+                return null;
+            }
             try {
                 // Create ObjectMapper
                 ObjectMapper objectMapper1 = new ObjectMapper();
@@ -139,19 +146,17 @@ String llmresponse = new String();
 
                 // Print the mapped Ingredient
                 System.out.println("Ingredient: " + ingredient);
-
+                return ingredient;
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new ResourceNotFoundException("no json found ingredient nutrition model not generated");
+//                e.printStackTrace();
             }
 //            ingredient = objectMapper.readValue(substringAfterColon, Ingredient.class);
-            return ingredient;
-
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ResourceNotFoundException("no content found");
+//            e.printStackTrace();
         }
-
-        return ingredient;
     }
 
 }

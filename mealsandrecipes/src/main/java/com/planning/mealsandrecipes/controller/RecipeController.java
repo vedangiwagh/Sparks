@@ -1,5 +1,6 @@
 package com.planning.mealsandrecipes.controller;
 
+import com.planning.mealsandrecipes.entity.RecipeIngredient;
 import com.planning.mealsandrecipes.model.MealModel;
 import com.planning.mealsandrecipes.model.NutritionModel;
 import com.planning.mealsandrecipes.entity.Recipe;
@@ -115,5 +116,13 @@ public class RecipeController {
     @ApiResponse(responseCode = "200", description = "Recipe deleted successfully")
     public void deleteRecipe(@PathVariable Integer recipeId) {
         recipeService.deleteRecipe(recipeId);
+    }
+
+    @GetMapping("/llm/{recipeName}")
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of Recipe")
+    @ApiResponse(responseCode = "404", description = "no Recipe could be generated")
+    public Recipe getRecipeByLLM(@PathVariable String recipeName) {
+        // Implement logic to retrieve all recipe ingredients
+        return recipeService.generateRecipeUsingLLM(recipeName);
     }
 }
