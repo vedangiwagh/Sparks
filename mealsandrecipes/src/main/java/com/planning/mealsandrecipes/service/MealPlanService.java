@@ -49,7 +49,17 @@ public class MealPlanService {
 
         List<Recipe> recipes = recipeRepository.findByMealTypeAndRecipeTypeAndClient(mealType,recipeType, clientId);
         List<MealModel> mealModels = findIngredients(recipes);
+        //check if nutrition is null
+        Iterator<MealModel> iterator1 = mealModels.iterator();
+        while (iterator1.hasNext()) {
+            MealModel mealModel = iterator1.next();
 
+            // Check if it contains ingredients from diet restrictions
+            if (mealModel.getNutritionModel().getCalories() == null || mealModel.getNutritionModel().getCalories() == 0.0) {
+                iterator1.remove();
+                continue; // Continue to the next iteration
+            }
+        }
         if(dietRestrictions != null || calorieLimit != 0) {
             Iterator<MealModel> iterator = mealModels.iterator();
             while (iterator.hasNext()) {
