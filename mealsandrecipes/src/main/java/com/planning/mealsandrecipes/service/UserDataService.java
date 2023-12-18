@@ -37,8 +37,13 @@ public class UserDataService {
         return userRepository.findById(userEmail).orElse(null);
     }
 
-//    public List<UserData> getUsersByClientId(Long clientId) {
-//        return userRepository.findByClientId(clientId);
-//    }
+    public String login(String mail, String pass) {
+        UserData userData = getUserByEmail(mail);
+        if(userData.getPassword().equals(pass)){
+            return userData.getUser_name();
+        }else{
+            return "Not Found";
+        }
+    }
 }
 

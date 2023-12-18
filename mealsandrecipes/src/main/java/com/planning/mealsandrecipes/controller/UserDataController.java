@@ -35,6 +35,11 @@ public class UserDataController {
         return userService.getUserByEmail(userEmail);
     }
 
+    @GetMapping("/login/{userEmail}/{password}")
+    public String login(@PathVariable String userEmail, @PathVariable String password) {
+        return userService.login(userEmail,password);
+    }
+
 //    @GetMapping("/getUsersByClientId/{clientId}")
 //    public List<UserData> getUsersByClientId(@RequestParam Long clientId) {
 //        return userService.getUsersByClientId(clientId);
